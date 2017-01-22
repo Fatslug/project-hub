@@ -6,14 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
-// Custom Components
-import { AppComponent } from './app.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AccountService } from './account/account.service';
-
 // Firebase configuration with AngularFire2
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { ProjectFormComponent } from './project-form/project-form.component';
 export const firebaseConfig = {
 	apiKey: 'AIzaSyCbhwjhSAW-EQOPkL2aYrDdycOwiIy2Lq4',
 	authDomain: 'project-hub-21d44.firebaseapp.com',
@@ -26,16 +20,43 @@ const firebaseAuthConfig = {
 	method: AuthMethods.Redirect
 };
 
+// Custom Components
+import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AccountService } from './account/account.service';
+import { ProjectFormComponent } from './projects/project-form/project-form.component';
+import { ProjectsComponent } from './projects/projects.component';
+
 // App Routing
 const appRoutes: Routes = [
-	{ path: '', component: HomePageComponent },
-	{ path: 'home', component: HomePageComponent }
+	{
+		path: '',
+		component: HomePageComponent
+	},
+	{
+		path: 'home',
+		component: HomePageComponent
+	},
+	{
+		path: 'projects',
+		children: [{
+			path: ':id',
+			component: ProjectFormComponent
+		}, {
+			path: '',
+			component: ProjectsComponent
+		}, {
+			path: 'add',
+			component: ProjectFormComponent
+		}]
+	}
 ];
 
 @NgModule({
 declarations: [
 	AppComponent,
 	HomePageComponent,
+	ProjectsComponent,
 	ProjectFormComponent
 ],
 imports: [

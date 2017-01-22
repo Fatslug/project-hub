@@ -1,7 +1,7 @@
 <h1>Project Hub</h1>
 <nav>
 	<a routerLink="/home" routerLinkActive="active">Home Page</a>
-	<!--<a routerLink="/login" routerLinkActive="active">Login</a>-->
+	<a routerLink="/projects" routerLinkActive="active">Projects</a>
 </nav>
 
 <button md-raised-button *ngIf="!account.loggedIn" (click)="login()">Login</button>
@@ -9,6 +9,5 @@
 
 <md-card>
 	{{ (account.firebase.auth | async)?.uid }}
+	<router-outlet></router-outlet>
 </md-card>
-
-<router-outlet></router-outlet>
