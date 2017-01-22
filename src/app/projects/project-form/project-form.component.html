@@ -1,7 +1,7 @@
 <md-card>
     <h1>Add Project</h1>
     
-    <form name = "projectForm" (ngSubmit)="addProject()">
+    <form name = "projectForm" (ngSubmit)="projectService.addProject(project)">
         <md-input-container>
             <input md-input [(ngModel)]="project.title" name = "projectTitle" placeholder="Project Title" />
         </md-input-container>

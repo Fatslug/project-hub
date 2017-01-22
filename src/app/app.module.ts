@@ -1,3 +1,4 @@
+import { ProjectService } from './projects/project.service';
 // Angular Libraries
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -68,7 +69,8 @@ imports: [
 	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 ],
 providers: [
-	AccountService
+	AccountService,
+	ProjectService
 ],
 bootstrap: [AppComponent]
 })
