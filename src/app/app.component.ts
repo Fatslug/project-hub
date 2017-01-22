@@ -1,3 +1,4 @@
+import { AccountService } from './account/account.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = 'app works!';
+
+	constructor(private account: AccountService) {}
+
+	login() {
+		this.account.login();
+	}
+	logout() {
+		this.account.logout();
+	}
 }
