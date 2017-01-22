@@ -13,6 +13,7 @@ import { AccountService } from './account/account.service';
 
 // Firebase configuration with AngularFire2
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { ProjectFormComponent } from './project-form/project-form.component';
 export const firebaseConfig = {
 	apiKey: 'AIzaSyCbhwjhSAW-EQOPkL2aYrDdycOwiIy2Lq4',
 	authDomain: 'project-hub-21d44.firebaseapp.com',
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
 @NgModule({
 declarations: [
 	AppComponent,
-	HomePageComponent
+	HomePageComponent,
+	ProjectFormComponent
 ],
 imports: [
 	BrowserModule,
