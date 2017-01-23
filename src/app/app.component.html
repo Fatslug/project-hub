@@ -1,6 +1,12 @@
-<h1>
-  {{title}}
-</h1>
-<md-input-container>
-	<input md-input type = "date" placeholder="Date Picker" />
-</md-input-container>
+<h1>Project Hub</h1>
+<nav>
+	<a routerLink="/home" routerLinkActive="active">Home Page</a>
+	<a routerLink="/projects" *ngIf="account.loggedIn" routerLinkActive="active">Projects</a>
+</nav>
+
+<button md-raised-button *ngIf="!account.loggedIn" (click)="login()">Login</button>
+<button md-raised-button *ngIf="account.loggedIn" routerLink="/home" (click)="logout()">Logout</button>
+
+<md-card>
+	<router-outlet></router-outlet>
+</md-card>
