@@ -1,3 +1,7 @@
+// Services
+import { AuthGuardService } from './auth-guard.service';
+import { ProjectService } from './projects/project.service';
+
 // Angular Libraries
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -5,11 +9,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-
-// Custom Components
-import { AppComponent } from './app.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AccountService } from './account/account.service';
 
 // Firebase configuration with AngularFire2
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -25,16 +24,45 @@ const firebaseAuthConfig = {
 	method: AuthMethods.Redirect
 };
 
+// Custom Components
+import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AccountService } from './account/account.service';
+import { ProjectFormComponent } from './projects/project-form/project-form.component';
+import { ProjectsComponent } from './projects/projects.component';
+
 // App Routing
 const appRoutes: Routes = [
-	{ path: '', component: HomePageComponent },
-	{ path: 'home', component: HomePageComponent }
+	{
+		path: '',
+		component: HomePageComponent
+	},
+	{
+		path: 'home',
+		component: HomePageComponent
+	},
+	{
+		path: 'projects',
+		canActivate: [AuthGuardService],
+		children: [{
+			path: ':id',
+			component: ProjectFormComponent
+		}, {
+			path: '',
+			component: ProjectsComponent
+		}, {
+			path: 'add',
+			component: ProjectFormComponent
+		}]
+	}
 ];
 
 @NgModule({
 declarations: [
 	AppComponent,
-	HomePageComponent
+	HomePageComponent,
+	ProjectsComponent,
+	ProjectFormComponent
 ],
 imports: [
 	BrowserModule,
@@ -45,7 +73,9 @@ imports: [
 	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 ],
 providers: [
-	AccountService
+	AccountService,
+	ProjectService,
+	AuthGuardService
 ],
 bootstrap: [AppComponent]
 })
