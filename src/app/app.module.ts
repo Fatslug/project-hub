@@ -1,4 +1,7 @@
+// Services
+import { AuthGuardService } from './auth-guard.service';
 import { ProjectService } from './projects/project.service';
+
 // Angular Libraries
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -40,6 +43,7 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'projects',
+		canActivate: [AuthGuardService],
 		children: [{
 			path: ':id',
 			component: ProjectFormComponent
@@ -70,7 +74,8 @@ imports: [
 ],
 providers: [
 	AccountService,
-	ProjectService
+	ProjectService,
+	AuthGuardService
 ],
 bootstrap: [AppComponent]
 })
