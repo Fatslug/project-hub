@@ -10,10 +10,4 @@ export class AppComponent {
 
 	constructor(private account: AccountService) {}
 
-	login() {
-		this.account.login();
-	}
-	logout() {
-		this.account.logout();
-	}
 }
