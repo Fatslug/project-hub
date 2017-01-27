@@ -29,12 +29,22 @@ export class AccountService {
 	}
 
 	login() {
+		let userExists: boolean;
 		console.log('Logging in...');
 		this.firebase.auth.login().then(authUser => {
 			this.currentUser = authUser.auth.providerData[0];
-			// this.isRegistered(this.currentUser);
-			const userID = this.firebase.database.object('users').$ref.transaction(userRef => {
-				console.log(userRef);
+
+			// Use FIRST to unsubscribe after first response from subscription
+			this.firebase.database.list('users', {
+				query: {
+					orderByChild: 'uid',
+					equalTo: this.currentUser.uid
+				}
+			}).first().subscribe((userRef) => {
+				if (userRef.length <= 0) {
+					this.logout();
+					console.log('User is not registered');
+				}
 			});
 		});
 	}
