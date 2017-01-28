@@ -1,12 +1,12 @@
 <h1>Project Hub</h1>
 <nav>
 	<a routerLink="/home" routerLinkActive="active">Home Page</a>
-	<a routerLink="/projects" *ngIf="account.loggedIn" routerLinkActive="active">Projects</a>
+	<a routerLink="/projects" *ngIf="accountService.loggedIn" routerLinkActive="active">Projects</a>
 </nav>
 
-<button md-raised-button *ngIf="!account.loggedIn" (click)="account.login()">Login</button>
-<button md-raised-button *ngIf="!account.loggedIn" (click)="account.register()">Register</button>
-<button md-raised-button *ngIf="account.loggedIn" routerLink="/home" (click)="account.logout()">Logout</button>
+<button md-raised-button *ngIf="!accountService.loggedIn" (click)="accountService.login()">Login</button>
+<button md-raised-button *ngIf="!accountService.loggedIn" (click)="accountService.register()">Register</button>
+<button md-raised-button *ngIf="accountService.loggedIn" routerLink="/home" (click)="accountService.logout()">Logout</button>
 
 <md-card>
 	<router-outlet></router-outlet>
