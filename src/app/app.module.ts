@@ -21,7 +21,7 @@ export const firebaseConfig = {
 };
 const firebaseAuthConfig = {
 	provider: AuthProviders.Google,
-	method: AuthMethods.Redirect
+	method: AuthMethods.Popup
 };
 
 // Custom Components
