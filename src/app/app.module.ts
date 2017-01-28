@@ -74,7 +74,6 @@ imports: [
 ],
 providers: [
 	AccountService,
-	ProjectService,
 	AuthGuardService
 ],
 bootstrap: [AppComponent]

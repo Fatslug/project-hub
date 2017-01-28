@@ -1,23 +1,36 @@
 import { Project } from './project.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ProjectService {
+export class ProjectService implements OnDestroy {
 
 	$projects: FirebaseListObservable<any>;
+	$projectsSubscription: any;
 
 	constructor(private firebase: AngularFire) {
 		this.$projects = firebase.database.list('projects');
 
-		this.$projects.subscribe(val => {
+		this.$projectsSubscription = this.$projects.subscribe(val => {
 			console.log(val);
 		});
 	}
 
 	addProject(project: Project): Promise<boolean> {
-		this.$projects.push(project);
-		return Promise.resolve(false);
+		return new Promise((resolve, reject) => {
+			this.$projects.push(project).then(result => {
+				if (result) {
+					resolve(true);
+				} else {
+					reject();
+				}
+			});
+		});
+	}
+
+	ngOnDestroy() {
+		this.$projectsSubscription.unsubscribe();
 	}
 
 }
