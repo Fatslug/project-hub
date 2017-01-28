@@ -8,12 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-	constructor(private account: AccountService) {}
+	constructor(private accountService: AccountService) { }
 
-	login() {
-		this.account.login();
-	}
-	logout() {
-		this.account.logout();
-	}
 }
