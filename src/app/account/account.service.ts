@@ -70,18 +70,4 @@ export class AccountService {
 			});
 		});
 	}
-
-	isLoggedIn(): Promise<boolean> {
-		return new Promise((resolve, reject) => {
-			this.isRegistered(this.currentUser).then(result => {
-				if (result) {
-					console.log('User is logged in legitimately');
-					resolve(true);
-				} else {
-					console.log('User has faked their login');
-					resolve(false);
-				}
-			});
-		});
-	}
 }
