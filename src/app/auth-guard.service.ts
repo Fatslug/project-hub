@@ -1,3 +1,4 @@
+import { AngularFire } from 'angularfire2';
 import { AccountService } from './account/account.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
@@ -5,15 +6,24 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-	constructor(private account: AccountService, private router: Router) { }
+	constructor(
+		private account: AccountService,
+		private router: Router,
+		private firebase: AngularFire
+	) {
+	}
 
 	canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-		if (this.account.loggedIn) {
-			return true;
-		} else {
-			this.router.navigate(['/home']);
-			return false;
-		}
+		return this.account.isLoggedIn().then(loggedIn => {
+			if (loggedIn) {
+				console.log('Logged in, good to go');
+				return true;
+			} else {
+				console.log('Not logged in, rejected');
+				this.router.navigate(['/home']);
+				return false;
+			}
+		});
 	}
 
 }

@@ -7,9 +7,9 @@ import { Injectable } from '@angular/core';
 export class AccountService {
 
 	public loggedIn: boolean;
+	public currentUser: Account;
 
 	private users: FirebaseListObservable<any>;
-	private currentUser: Account;
 
 	constructor(public firebase: AngularFire) {
 		this.users = this.firebase.database.list('users');
@@ -66,6 +66,20 @@ export class AccountService {
 					resolve(false);
 				} else {
 					resolve(true);
+				}
+			});
+		});
+	}
+
+	isLoggedIn(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.firebase.auth.first().subscribe(user => {
+				if (user) {
+					this.currentUser = user.auth.providerData[0];
+					this.loggedIn = true;
+					resolve(true);
+				} else {
+					resolve(false);
 				}
 			});
 		});
