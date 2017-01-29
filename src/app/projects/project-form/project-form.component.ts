@@ -35,6 +35,7 @@ export class ProjectFormComponent implements OnInit {
 					this.mode = 'edit';
 
 					this.project = project[0];
+
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
 				} else {
@@ -48,25 +49,24 @@ export class ProjectFormComponent implements OnInit {
 			description: [this.project.description, Validators.required]
 		});
 
-		this.subscribeToFormValueChanges();
 	}
 
 	ngOnInit() {
 	}
 
-	subscribeToFormValueChanges() {
-		this.projectForm.valueChanges.subscribe(change => {
-			console.log(change);
-		});
-	}
-
 	addProject(formValues) {
-		const project: Project = {
-			id: new Date().getTime(),
+		this.project = {
+			id: this.project.id ? this.project.id : new Date().getTime(),
 			title: formValues.title,
 			description: formValues.description
 		};
-		this.projectService.addProject(project);
+
+		if (this.mode === 'edit') {
+			this.project.$key = this.project.$key;
+			this.projectService.updateProject(this.project.$key, this.project);
+		} else {
+			this.projectService.addProject(this.project);
+		}
 	}
 
 }
