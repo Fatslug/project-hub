@@ -24,9 +24,11 @@ export class ProjectsComponent implements OnInit {
 	}
 
 	searchProjects(searchTerm: string) {
-		this.projectService.searchProjects(searchTerm).then(projects => {
-			this.projects = projects;
-		});
+		if (searchTerm) {
+			this.projectService.searchProjects(searchTerm).then(projects => {
+				this.projects = projects;
+			});
+		}
 	}
 
 }
