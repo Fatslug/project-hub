@@ -6,7 +6,7 @@ import { ProjectService } from './projects/project.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
@@ -58,25 +58,25 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-declarations: [
-	AppComponent,
-	HomePageComponent,
-	ProjectsComponent,
-	ProjectFormComponent
-],
-imports: [
-	BrowserModule,
-	FormsModule,
-	HttpModule,
-	MaterialModule.forRoot(),
-	RouterModule.forRoot(appRoutes),
-	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
-],
-providers: [
-	AccountService,
-	ProjectService,
-	AuthGuardService
-],
-bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HomePageComponent,
+		ProjectsComponent,
+		ProjectFormComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpModule,
+		MaterialModule.forRoot(),
+		RouterModule.forRoot(appRoutes),
+		AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+	],
+	providers: [
+		AccountService,
+		AuthGuardService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
