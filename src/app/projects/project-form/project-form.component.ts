@@ -55,17 +55,19 @@ export class ProjectFormComponent implements OnInit {
 	}
 
 	addProject(formValues) {
-		this.project = {
+		const project: Project = {
 			id: this.project.id ? this.project.id : new Date().getTime(),
 			title: formValues.title,
 			description: formValues.description
 		};
 
 		if (this.mode === 'edit') {
-			this.project.$key = this.project.$key;
-			this.projectService.updateProject(this.project.$key, this.project);
+			project.$key = this.project.$key;
+			this.projectService.updateProject(project.$key, project);
+			console.log('Project updated');
 		} else {
 			this.projectService.addProject(this.project);
+			console.log('Project added');
 		}
 	}
 
