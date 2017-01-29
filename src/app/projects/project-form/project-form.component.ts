@@ -1,4 +1,4 @@
-import { ProjectConfirmSnackComponent } from './../project-confirm-snack/project-confirm-snack.component';
+import { ConfirmSnackbarComponent } from './../../confirm-snackbar/confirm-snackbar.component';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { ProjectService } from './../project.service';
@@ -59,7 +59,7 @@ export class ProjectFormComponent implements OnInit {
 	}
 
 	openSnackBar(message: string) {
-		this.snackBar.openFromComponent(ProjectConfirmSnackComponent, {
+		this.snackBar.openFromComponent(ConfirmSnackbarComponent, {
 			duration: 2000
 		});
 	}

@@ -30,7 +30,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ProjectConfirmSnackComponent } from './projects/project-confirm-snack/project-confirm-snack.component';
+import { ConfirmSnackbarComponent } from './confirm-snackbar/confirm-snackbar.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -64,7 +64,7 @@ const appRoutes: Routes = [
 		HomePageComponent,
 		ProjectsComponent,
 		ProjectFormComponent,
-		ProjectConfirmSnackComponent
+		ConfirmSnackbarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -81,7 +81,7 @@ const appRoutes: Routes = [
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [
-		ProjectConfirmSnackComponent
+		ConfirmSnackbarComponent
 	]
 })
 export class AppModule { }
