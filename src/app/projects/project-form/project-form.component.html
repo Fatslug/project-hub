@@ -1,11 +1,11 @@
 <h1>Add Project</h1>
 
-<form [formGroup]="projectForm" (ngSubmit)="addProject(project)">
+<form [formGroup]="projectForm" (ngSubmit)="addProject(projectForm.value)">
     <md-input-container>
-        <input md-input formControlName="title" name="projectTitle" placeholder="Project Title" />
+        <input mdInput formControlName="title" name="projectTitle" placeholder="Project Title" />
     </md-input-container>
     <md-input-container>
-        <textarea md-input formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
+        <textarea mdInput formControlName="description" name="projectDescription" placeholder="Project Description" (change)="console.log('changed')"></textarea>
     </md-input-container>
 
     <button type="submit" md-raised-button>Submit</button>

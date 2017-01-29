@@ -13,7 +13,7 @@ export class ProjectService implements OnDestroy {
 		this.$projects = firebase.database.list('projects');
 
 		this.$projectsSubscription = this.$projects.subscribe(val => {
-			console.log(val);
+			// console.log(val);
 		});
 	}
 
@@ -24,6 +24,24 @@ export class ProjectService implements OnDestroy {
 					resolve(true);
 				} else {
 					reject();
+				}
+			});
+		});
+	}
+
+	getProject(projectID): Promise<Project> {
+		return new Promise((resolve, reject) => {
+			const projectQuery = this.firebase.database.list('projects', {
+				query: {
+					orderByChild: 'id',
+					equalTo: projectID
+				}
+			}).first().subscribe((projectRef) => {
+				console.log(projectRef.length);
+				if (projectRef.length === 1) {
+					resolve(projectRef);
+				} else {
+					resolve(false);
 				}
 			});
 		});
