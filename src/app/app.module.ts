@@ -78,7 +78,7 @@ const appRoutes: Routes = [
 			path: ':pid/add',
 			component: TaskFormComponent
 		}, {
-			path: 'edit/:id',
+			path: ':pid/edit/:id',
 			component: TaskFormComponent
 		}]
 	}

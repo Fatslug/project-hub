@@ -28,6 +28,8 @@ export class TaskFormComponent implements OnInit {
 
 	mode: string = 'new';
 	taskID: number;
+	projectID: number;
+	projectKey: string;
 
 	constructor (
 		private taskService: TaskService,
@@ -42,19 +44,30 @@ export class TaskFormComponent implements OnInit {
 		});
 
 		this.taskID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
-		if (this.taskID) {
-			this.taskService.getTask(this.taskID).then(task => {
-				if (task) {
-					this.mode = 'edit';
+		this.projectID = this.route.snapshot.params['pid'] ? parseInt(this.route.snapshot.params['pid'], 10) : undefined;
 
-					this.task = task[0];
+		console.log('Task ID: ' + this.taskID);
+		console.log('Project ID: ' + this.projectID);
 
-					this.taskForm.get('title').setValue(this.task.title);
-					this.taskForm.get('description').setValue(this.task.description);
-					this.taskForm.get('projectKey').setValue(this.task.$key);
-				} else {
-					console.log('Task does not exist');
-				}
+		if (this.taskID && this.projectID) {
+			// TODO: Make this more efficient (why should we have to query the projects list first???) -- maybe scrap ID and use Key
+			// Get project key from id
+			this.projectService.getProject(this.projectID).then(project => {
+				this.projectKey = project.$key;
+				// Now get the task with that project key
+				this.taskService.getTask(this.projectKey, this.taskID).then(task => {
+					if (task) {
+						this.mode = 'edit';
+
+						this.task = task[0];
+
+						this.taskForm.get('title').setValue(this.task.title);
+						this.taskForm.get('description').setValue(this.task.description);
+						this.taskForm.get('projectKey').setValue(this.projectKey);
+					} else {
+						console.log('Task does not exist');
+					}
+				});
 			});
 		}
 

@@ -10,15 +10,14 @@ export class TaskService {
 	constructor(private firebase: AngularFire) {
 	}
 
-	getTask(taskID): Promise<Task> {
+	getTask(projectKey, taskID): Promise<Task> {
 		return new Promise((resolve, reject) => {
-			const projectQuery = this.firebase.database.list('tasks', {
+			const projectQuery = this.firebase.database.list('tasks/' + projectKey, {
 				query: {
 					orderByChild: 'id',
 					equalTo: taskID
 				}
 			}).first().subscribe((taskRef) => {
-				console.log(taskRef.length);
 				if (taskRef.length === 1) {
 					resolve(taskRef);
 				} else {

@@ -17,12 +17,12 @@ export class ProjectService {
 			const projectQuery = this.firebase.database.list('projects', {
 				query: {
 					orderByChild: 'id',
-					equalTo: projectID
+					equalTo: projectID,
+					limitToFirst: 1
 				}
 			}).first().subscribe((projectRef) => {
-				console.log(projectRef.length);
 				if (projectRef.length === 1) {
-					resolve(projectRef);
+					resolve(projectRef[0]);
 				} else {
 					resolve(false);
 				}
