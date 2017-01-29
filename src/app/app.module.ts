@@ -30,6 +30,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectCardComponent } from './projects/project-card/project-card.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -62,8 +63,9 @@ const appRoutes: Routes = [
 		AppComponent,
 		HomePageComponent,
 		ProjectsComponent,
-		ProjectFormComponent
-	],
+		ProjectFormComponent,
+		ProjectCardComponent
+],
 	imports: [
 		BrowserModule,
 		FormsModule,

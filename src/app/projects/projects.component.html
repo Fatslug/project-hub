@@ -1,5 +1,5 @@
 <button md-button-raised routerLink="/projects/add">Add Project</button>
-<p>
-  projects works!
-</p>
+
+<app-project-card class="card-grid-item" *ngFor="let project of projects" [project]="project"></app-project-card>
+
 <router-outlet></router-outlet>
