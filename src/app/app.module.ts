@@ -31,6 +31,7 @@ import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectCardComponent } from './projects/project-card/project-card.component';
+import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -46,11 +47,14 @@ const appRoutes: Routes = [
 		path: 'projects',
 		canActivate: [AuthGuardService],
 		children: [{
-			path: ':id',
-			component: ProjectFormComponent
-		}, {
 			path: '',
 			component: ProjectsComponent
+		}, {
+			path: ':id',
+			component: ProjectDetailsComponent
+		}, {
+			path: 'edit/:id',
+			component: ProjectFormComponent
 		}, {
 			path: 'add',
 			component: ProjectFormComponent
@@ -64,8 +68,9 @@ const appRoutes: Routes = [
 		HomePageComponent,
 		ProjectsComponent,
 		ProjectFormComponent,
-		ProjectCardComponent
-],
+		ProjectCardComponent,
+		ProjectDetailsComponent
+	],
 	imports: [
 		BrowserModule,
 		FormsModule,

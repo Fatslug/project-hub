@@ -22,7 +22,7 @@ export class ProjectFormComponent implements OnInit {
 	description: FormControl;
 
 	mode: string = 'new';
-	formID: number;
+	projectID: number;
 
 	constructor (
 		private projectService: ProjectService,
@@ -31,9 +31,9 @@ export class ProjectFormComponent implements OnInit {
 		private router: Router,
 		private snackbar: MdSnackBar
 	) {
-		this.formID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
-		if (this.formID) {
-			this.projectService.getProject(this.formID).then(project => {
+		this.projectID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
+		if (this.projectID) {
+			this.projectService.getProject(this.projectID).then(project => {
 				if (project) {
 					this.mode = 'edit';
 
