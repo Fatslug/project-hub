@@ -2,8 +2,21 @@
 
 body {
     background-color: #f4f4f4;
+    font-family: 'Roboto', 'Helvetica Neue Light' ,'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
 }
 
 md-card {
     background-color: white;
+}
+
+.cdk-overlay-container {
+    color: white;
+    text-align: center;
+    position: fixed; left: 50%; bottom: 0px; transform: translateX(-50%) translateX(0px);
+}
+.cdk-overlay-container p {
+    color: white !important;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }

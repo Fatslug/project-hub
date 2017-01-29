@@ -1,20 +1,16 @@
 import { Project } from './project.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ProjectService implements OnDestroy {
+export class ProjectService {
 
 	$projects: FirebaseListObservable<any>;
 	$projectsSubscription: any;
 
 	constructor(private firebase: AngularFire) {
 		this.$projects = firebase.database.list('projects');
-
-		this.$projectsSubscription = this.$projects.subscribe(val => {
-			// console.log(val);
-		});
 	}
 
 	getProject(projectID): Promise<Project> {
@@ -41,7 +37,7 @@ export class ProjectService implements OnDestroy {
 				if (result) {
 					resolve(true);
 				} else {
-					reject();
+					resolve(false);
 				}
 			});
 		});
@@ -59,10 +55,6 @@ export class ProjectService implements OnDestroy {
 				console.log(error);
 			});
 		});
-	}
-
-	ngOnDestroy() {
-		this.$projectsSubscription.unsubscribe();
 	}
 
 }

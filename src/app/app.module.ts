@@ -30,6 +30,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectConfirmSnackComponent } from './projects/project-confirm-snack/project-confirm-snack.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -58,25 +59,29 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-declarations: [
-	AppComponent,
-	HomePageComponent,
-	ProjectsComponent,
-	ProjectFormComponent
-],
-imports: [
-	BrowserModule,
-	FormsModule,
-	ReactiveFormsModule,
-	HttpModule,
-	MaterialModule.forRoot(),
-	RouterModule.forRoot(appRoutes),
-	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
-],
-providers: [
-	AccountService,
-	AuthGuardService
-],
-bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HomePageComponent,
+		ProjectsComponent,
+		ProjectFormComponent,
+		ProjectConfirmSnackComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpModule,
+		MaterialModule.forRoot(),
+		RouterModule.forRoot(appRoutes),
+		AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+	],
+	providers: [
+		AccountService,
+		AuthGuardService
+	],
+	bootstrap: [AppComponent],
+	entryComponents: [
+		ProjectConfirmSnackComponent
+	]
 })
 export class AppModule { }
