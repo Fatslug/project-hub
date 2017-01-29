@@ -1,6 +1,5 @@
-import { ConfirmSnackbarComponent } from './../../confirm-snackbar/confirm-snackbar.component';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
 import { ProjectService } from './../project.service';
 import { Project } from './../project.model';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 	templateUrl: './project-form.component.html',
 	styleUrls: ['./project-form.component.css'],
 	providers: [
-		ProjectService
+		ProjectService,
 	]
 })
 export class ProjectFormComponent implements OnInit {
@@ -29,8 +28,8 @@ export class ProjectFormComponent implements OnInit {
 		private projectService: ProjectService,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
-		public snackBar: MdSnackBar,
-		private router: Router
+		private router: Router,
+		private snackbar: MdSnackBar
 	) {
 		this.formID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
 		if (this.formID) {
@@ -59,9 +58,9 @@ export class ProjectFormComponent implements OnInit {
 	}
 
 	openSnackBar(message: string) {
-		this.snackBar.openFromComponent(ConfirmSnackbarComponent, {
-			duration: 2000
-		});
+		const config = new MdSnackBarConfig();
+		config.duration = 3000;
+		this.snackbar.open(message, null, config);
 	}
 
 	addProject(formValues) {

@@ -30,7 +30,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ConfirmSnackbarComponent } from './confirm-snackbar/confirm-snackbar.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -63,8 +62,7 @@ const appRoutes: Routes = [
 		AppComponent,
 		HomePageComponent,
 		ProjectsComponent,
-		ProjectFormComponent,
-		ConfirmSnackbarComponent
+		ProjectFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -79,9 +77,6 @@ const appRoutes: Routes = [
 		AccountService,
 		AuthGuardService
 	],
-	bootstrap: [AppComponent],
-	entryComponents: [
-		ConfirmSnackbarComponent
-	]
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
