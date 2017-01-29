@@ -1,12 +1,14 @@
-<h1>Add Project</h1>
+<md-card>
+    <h1>Add Project</h1>
 
-<form [formGroup]="projectForm" (ngSubmit)="addProject(projectForm.value)">
-    <md-input-container>
-        <input mdInput formControlName="title" name="projectTitle" placeholder="Project Title" />
-    </md-input-container>
-    <md-input-container>
-        <textarea mdInput formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
-    </md-input-container>
+    <form [formGroup]="projectForm" (ngSubmit)="addProject(projectForm.value)">
+        <md-input-container>
+            <input mdInput formControlName="title" name="projectTitle" placeholder="Project Title" />
+        </md-input-container>
+        <md-input-container>
+            <textarea mdInput formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
+        </md-input-container>
 
-    <button type="submit" md-raised-button>Submit</button>
-</form>
+        <button type="submit" md-raised-button>Submit</button>
+    </form>
+</md-card>

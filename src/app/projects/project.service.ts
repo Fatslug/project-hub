@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 export class ProjectService {
 
 	$projects: FirebaseListObservable<any>;
-	$projectsSubscription: any;
 
 	constructor(private firebase: AngularFire) {
 		this.$projects = firebase.database.list('projects');
@@ -27,6 +26,14 @@ export class ProjectService {
 				} else {
 					resolve(false);
 				}
+			});
+		});
+	}
+
+	getAllProjects(): Promise<Project[]> {
+		return new Promise((resolve, reject) => {
+			this.$projects.first().subscribe(project => {
+				resolve(project);
 			});
 		});
 	}
@@ -53,6 +60,16 @@ export class ProjectService {
 				resolve(true);
 			}).catch((error) => {
 				console.log(error);
+			});
+		});
+	}
+
+	searchProjects(searchTerm: string) {
+		const term = searchTerm.toLocaleLowerCase();
+		const results: Project[] = [];
+		return this.getAllProjects().then(projects => {
+			return projects.filter(project => {
+				return project.title.toLocaleLowerCase().indexOf(term) > -1;
 			});
 		});
 	}

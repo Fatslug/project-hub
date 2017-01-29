@@ -1,5 +1,20 @@
-<button md-button-raised routerLink="/projects/add">Add Project</button>
-<p>
-  projects works!
-</p>
+<button md-raised-button routerLink="/projects/add">Add Project</button> <br /><br />
+
+<form id="searchForm" (ngSubmit)="searchProjects(searchTerm)">
+	<md-input-container>
+		<input mdInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search"/>
+	</md-input-container>
+	<button md-button>Search</button>
+</form>
+<br />
+
+Filters: <a href="#">Category</a>
+<br />
+
+Sort By: <a href="#">Recently Updated</a>&nbsp;&nbsp;<a href="#">Date Created</a>
+<br />
+<br />
+
+<app-project-card class="card-grid-item" *ngFor="let project of projects" [project]="project"></app-project-card>
+
 <router-outlet></router-outlet>

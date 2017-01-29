@@ -1,0 +1,15 @@
+<md-card class="example-card">
+	<md-card-header>
+		<md-card-title>{{ project.title }}</md-card-title>
+		<md-card-subtitle>Project ID: {{ project.id }}</md-card-subtitle>
+	</md-card-header>
+	<img md-card-image src="assets/img/project-mock.png">
+	<md-card-content>
+		<p>
+			{{ project.description }}
+		</p>
+	</md-card-content>
+	<md-card-actions>
+		<button md-button routerLink="/projects/{{ project.id }}">VIEW</button>
+	</md-card-actions>
+</md-card>
