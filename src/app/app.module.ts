@@ -50,7 +50,7 @@ const appRoutes: Routes = [
 			path: '',
 			component: ProjectsComponent
 		}, {
-			path: ':id',
+			path: 'view/:id',
 			component: ProjectDetailsComponent
 		}, {
 			path: 'edit/:id',
