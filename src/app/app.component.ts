@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AccountService } from './account/account.service';
 import { Component } from '@angular/core';
 
@@ -8,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-	constructor(private accountService: AccountService) { }
+	constructor(
+		private accountService: AccountService,
+		private router: Router
+		) { }
+
+	logout() {
+		this.router.navigate(['/home']);
+		this.accountService.logout();
+	}
 
 }
