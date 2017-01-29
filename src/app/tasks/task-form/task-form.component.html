@@ -1,0 +1,19 @@
+<md-card>
+    <h1>Add Task</h1>
+
+    <form [formGroup]="taskForm" (ngSubmit)="addTask(taskForm.value)">
+        <md-input-container>
+            <input mdInput formControlName="title" name="taskTitle" placeholder="Task Title" />
+        </md-input-container>
+        <md-input-container>
+            <textarea mdInput formControlName="description" name="taskDescription" placeholder="Task Description"></textarea>
+        </md-input-container>
+        <md-select placeholder="Select Project" formControlName="projectKey" name="projectKey">
+			<md-option *ngFor="let project of projects" [value]="project.$key">
+				{{ project.title }}
+			</md-option>
+		</md-select>
+
+        <button type="submit" md-raised-button>Submit</button>
+    </form>
+</md-card>

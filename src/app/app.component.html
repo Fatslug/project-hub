@@ -2,6 +2,7 @@
 <nav>
 	<a routerLink="/home" routerLinkActive="active">Home Page</a>
 	<a routerLink="/projects" *ngIf="accountService.loggedIn" routerLinkActive="active">Projects</a>
+	<a routerLink="/tasks" *ngIf="accountService.loggedIn" routerLinkActive="active">Tasks</a>
 </nav>
 
 <button md-raised-button *ngIf="!accountService.loggedIn" (click)="accountService.login()">Login</button>

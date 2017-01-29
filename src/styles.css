@@ -11,6 +11,10 @@ md-card {
     background-color: white;
 }
 
+md-option {
+    color: #333;
+}
+
 .cdk-overlay-container {
     color: white;
     text-align: center;

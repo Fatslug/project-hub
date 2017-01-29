@@ -32,6 +32,9 @@ import { ProjectFormComponent } from './projects/project-form/project-form.compo
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectCardComponent } from './projects/project-card/project-card.component';
 import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
+import { TaskFormComponent } from './tasks/task-form/task-form.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -59,6 +62,25 @@ const appRoutes: Routes = [
 			path: 'add',
 			component: ProjectFormComponent
 		}]
+	}, {
+		path: 'tasks',
+		canActivate: [AuthGuardService],
+		children: [{
+			path: '',
+			component: TasksComponent,
+		}, {
+			path: 'add',
+			component: TaskFormComponent
+		}, {
+			path: 'view/:id',
+			component: TaskDetailsComponent
+		}, {
+			path: ':pid/add',
+			component: TaskFormComponent
+		}, {
+			path: 'edit/:id',
+			component: TaskFormComponent
+		}]
 	}
 ];
 
@@ -69,7 +91,10 @@ const appRoutes: Routes = [
 		ProjectsComponent,
 		ProjectFormComponent,
 		ProjectCardComponent,
-		ProjectDetailsComponent
+		ProjectDetailsComponent,
+		TasksComponent,
+		TaskDetailsComponent,
+		TaskFormComponent
 	],
 	imports: [
 		BrowserModule,
