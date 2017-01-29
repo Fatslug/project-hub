@@ -8,6 +8,4 @@
 <button md-raised-button *ngIf="!accountService.loggedIn" (click)="accountService.register()">Register</button>
 <button md-raised-button *ngIf="accountService.loggedIn" routerLink="/home" (click)="logout()">Logout</button>
 
-<md-card>
-	<router-outlet></router-outlet>
-</md-card>
+<router-outlet></router-outlet>
