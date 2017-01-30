@@ -1,3 +1,4 @@
+import { ProjectsComponent } from './projects.component';
 import { Project } from './project.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Injectable } from '@angular/core';
@@ -30,6 +31,25 @@ export class ProjectService {
 		});
 	}
 
+	getProjectByTaskID(taskID): Promise<Project> {
+		return new Promise((resolve, reject) => {
+			const projectQuery = this.firebase.database.list('projects', {
+				query: {
+					orderByChild: 'tasks',
+					equalTo: taskID,
+					limitToFirst: 1
+				}
+			}).first().subscribe((projectRef) => {
+				console.log('ProjectRef', projectRef);
+				if (projectRef.length === 1) {
+					resolve(projectRef[0]);
+				} else {
+					resolve(false);
+				}
+			});
+		});
+	}
+
 	getAllProjects(): Promise<Project[]> {
 		return new Promise((resolve, reject) => {
 			this.$projects.first().subscribe(project => {
@@ -53,7 +73,6 @@ export class ProjectService {
 	updateProject(projectKey: string, project: Project): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.$projects.update(projectKey, {
-				id: project.id,
 				title: project.title,
 				description: project.description
 			}).then(result => {

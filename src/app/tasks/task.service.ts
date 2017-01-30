@@ -1,3 +1,4 @@
+import { ProjectService } from './../projects/project.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Task } from './task.model';
 import { Injectable } from '@angular/core';
@@ -6,8 +7,12 @@ import { Injectable } from '@angular/core';
 export class TaskService {
 
 	$tasks: FirebaseListObservable<any>;
+	$projectTasks: FirebaseListObservable<any>;
 
-	constructor(private firebase: AngularFire) {
+	constructor(
+		private firebase: AngularFire,
+		private projectService: ProjectService
+	) {
 	}
 
 	getTask(projectKey, taskID): Promise<Task> {
@@ -19,7 +24,7 @@ export class TaskService {
 				}
 			}).first().subscribe((taskRef) => {
 				if (taskRef.length === 1) {
-					resolve(taskRef);
+					resolve(taskRef[0]);
 				} else {
 					resolve(false);
 				}
@@ -29,10 +34,16 @@ export class TaskService {
 
 	addTask(projectKey: string, task: Task): Promise<boolean> {
 		this.$tasks = this.firebase.database.list('tasks/' + projectKey);
+		this.$projectTasks = this.firebase.database.list('projects/' + projectKey + '/tasks');
+
+		console.log('Adding task...');
+
 		return new Promise((resolve, reject) => {
 			this.$tasks.push(task).then(result => {
 				if (result) {
-					resolve(true);
+					this.$projectTasks.push(task.id).then(result => {
+						resolve(result);
+					});
 				} else {
 					resolve(false);
 				}
@@ -45,7 +56,6 @@ export class TaskService {
 	updateTask(taskKey: string, task: Task): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.$tasks.update(taskKey, {
-				id: task.id,
 				title: task.title,
 				description: task.description
 			}).then(result => {

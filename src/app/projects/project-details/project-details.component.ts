@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'app-project-details',
 	templateUrl: './project-details.component.html',
-	styleUrls: ['./project-details.component.css'],
-	providers: [
-		ProjectService
-	]
+	styleUrls: ['./project-details.component.css']
 })
 export class ProjectDetailsComponent implements OnInit {
 
@@ -26,7 +23,7 @@ export class ProjectDetailsComponent implements OnInit {
 		if (this.projectID) {
 			this.projectService.getProject(this.projectID).then(project => {
 				if (project) {
-					this.project = project[0];
+					this.project = project;
 				} else {
 					console.log('Project does not exist');
 				}

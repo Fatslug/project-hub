@@ -1,6 +1,8 @@
 // Services
+import { AccountService } from './account/account.service';
 import { AuthGuardService } from './auth-guard.service';
 import { ProjectService } from './projects/project.service';
+import { TaskService } from './tasks/task.service';
 
 // Angular Libraries
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,7 +29,6 @@ const firebaseAuthConfig = {
 // Custom Components
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { AccountService } from './account/account.service';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectCardComponent } from './projects/project-card/project-card.component';
@@ -107,7 +108,9 @@ const appRoutes: Routes = [
 	],
 	providers: [
 		AccountService,
-		AuthGuardService
+		AuthGuardService,
+		TaskService,
+		ProjectService
 	],
 	bootstrap: [AppComponent]
 })

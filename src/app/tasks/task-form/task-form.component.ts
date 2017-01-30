@@ -10,17 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
 	selector: 'app-task-form',
 	templateUrl: './task-form.component.html',
-	styleUrls: ['./task-form.component.css'],
-	providers: [
-		TaskService,
-		ProjectService
-	]
+	styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
 
 	task: Task = new Task();
 	projects: Project[] = [];
 
+	// Form controls
 	taskForm: FormGroup;
 	projectKeys: string[];
 	title: FormControl;
@@ -40,26 +37,27 @@ export class TaskFormComponent implements OnInit {
 		private snackbar: MdSnackBar
 	) {
 		this.projectService.getAllProjects().then(projects => {
+			// Required to build project dropdown
 			this.projects = projects;
-		});
 
-		this.taskID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
-		this.projectID = this.route.snapshot.params['pid'] ? parseInt(this.route.snapshot.params['pid'], 10) : undefined;
+			// Get URL params
+			this.taskID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
+			this.projectID = this.route.snapshot.params['pid'] ? parseInt(this.route.snapshot.params['pid'], 10) : undefined;
 
-		console.log('Task ID: ' + this.taskID);
-		console.log('Project ID: ' + this.projectID);
+			this.projectService.getProjectByTaskID(this.taskID).then(project => {
+				console.log(project);
+			})
 
-		if (this.taskID && this.projectID) {
-			// TODO: Make this more efficient (why should we have to query the projects list first???) -- maybe scrap ID and use Key
-			// Get project key from id
-			this.projectService.getProject(this.projectID).then(project => {
-				this.projectKey = project.$key;
+			if (this.taskID && this.projectID) {
+
+				this.projectKey = this.projects.filter(project => project.id === this.projectID).map(project => project.$key)[0];
+
 				// Now get the task with that project key
 				this.taskService.getTask(this.projectKey, this.taskID).then(task => {
 					if (task) {
 						this.mode = 'edit';
 
-						this.task = task[0];
+						this.task = task;
 
 						this.taskForm.get('title').setValue(this.task.title);
 						this.taskForm.get('description').setValue(this.task.description);
@@ -68,8 +66,8 @@ export class TaskFormComponent implements OnInit {
 						console.log('Task does not exist');
 					}
 				});
-			});
-		}
+			}
+		});
 
 		this.taskForm = this.formBuilder.group({
 			title: [this.task.title, Validators.required],
@@ -90,22 +88,23 @@ export class TaskFormComponent implements OnInit {
 
 	addTask(formValues) {
 		const projectKey = formValues.projectKey;
-		const task: Task = {
+		const task: Task[] = [{
 			id: this.task.id ? this.task.id : new Date().getTime(),
 			title: formValues.title,
 			description: formValues.description
-		};
+		}];
 
 		if (this.mode === 'edit') {
 			// task.$key = this.task.$key;
-			this.taskService.updateTask(task.$key, task).then(result => {
+			this.taskService.updateTask(task[0].$key, task[0]).then(result => {
 				if (result) {
 					this.openSnackBar('Task updated!');
 					this.router.navigate(['/tasks']);
 				}
 			});
 		} else {
-			this.taskService.addTask(projectKey, task).then(result => {
+			// Get project key from array of all projects
+			this.taskService.addTask(projectKey, task[0]).then(result => {
 				if (result) {
 					this.openSnackBar('Task Added!');
 					this.router.navigate(['/tasks']);

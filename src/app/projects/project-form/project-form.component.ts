@@ -8,10 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
 	selector: 'app-project-form',
 	templateUrl: './project-form.component.html',
-	styleUrls: ['./project-form.component.css'],
-	providers: [
-		ProjectService,
-	]
+	styleUrls: ['./project-form.component.css']
 })
 export class ProjectFormComponent implements OnInit {
 
@@ -37,7 +34,7 @@ export class ProjectFormComponent implements OnInit {
 				if (project) {
 					this.mode = 'edit';
 
-					this.project = project[0];
+					this.project = project;
 
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
