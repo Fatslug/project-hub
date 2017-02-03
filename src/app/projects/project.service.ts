@@ -66,14 +66,4 @@ export class ProjectService {
 		});
 	}
 
-	searchProjects(searchTerm: string) {
-		const term = searchTerm.toLocaleLowerCase();
-		const results: Project[] = [];
-		return this.getAllProjects().then(projects => {
-			return projects.filter(project => {
-				return project.title.toLocaleLowerCase().indexOf(term) > -1;
-			});
-		});
-	}
-
 }

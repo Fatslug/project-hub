@@ -34,14 +34,6 @@ export class TaskService {
 		});
 	}
 
-	getAllTasks(): Promise<Task[]> {
-		return new Promise((resolve, reject) => {
-			this.$tasks.first().subscribe(tasks => {
-				resolve(tasks);
-			});
-		});
-	}
-
 	// Push TASK to TASKS list
 	// Push TASKID to PROJECT/TASKS list
 	addTask(task: Task): Promise<boolean> {
@@ -79,16 +71,6 @@ export class TaskService {
 				resolve(true);
 			}).catch((error) => {
 				console.log(error);
-			});
-		});
-	}
-
-	searchTasks(searchTerm: string) {
-		const term = searchTerm.toLocaleLowerCase();
-		const results: Task[] = [];
-		return this.getAllTasks().then(tasks => {
-			return tasks.filter(task => {
-				return task.title.toLocaleLowerCase().indexOf(term) > -1;
 			});
 		});
 	}

@@ -37,6 +37,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { TaskCardComponent } from './tasks/task-card/task-card.component';
+import { SearchComponent } from './search/search.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -98,7 +99,9 @@ const appRoutes: Routes = [
 		TaskDetailsComponent,
 		TaskFormComponent,
 		TaskCardComponent
-	],
+	,
+    SearchComponent
+],
 	imports: [
 		BrowserModule,
 		FormsModule,

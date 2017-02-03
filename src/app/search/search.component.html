@@ -1,0 +1,6 @@
+<form id="searchForm" (ngSubmit)="searchItems(searchTerm)">
+	<md-input-container>
+		<input mdInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search"/>
+	</md-input-container>
+	<button md-button>Search</button>
+</form>
