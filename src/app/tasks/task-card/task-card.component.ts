@@ -12,7 +12,6 @@ export class TaskCardComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
-		console.log(this.task);
 	}
 
 }

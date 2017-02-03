@@ -83,4 +83,14 @@ export class TaskService {
 		});
 	}
 
+	searchTasks(searchTerm: string) {
+		const term = searchTerm.toLocaleLowerCase();
+		const results: Task[] = [];
+		return this.getAllTasks().then(tasks => {
+			return tasks.filter(task => {
+				return task.title.toLocaleLowerCase().indexOf(term) > -1;
+			});
+		});
+	}
+
 }

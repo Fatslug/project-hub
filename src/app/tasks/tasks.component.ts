@@ -18,4 +18,12 @@ export class TasksComponent implements OnInit {
 			this.tasks = tasks;
 		});
 	}
+
+	searchTasks(searchTerm: string) {
+		if (searchTerm) {
+			this.taskService.searchTasks(searchTerm).then(tasks => {
+				this.tasks = tasks;
+			});
+		}
+	}
 }

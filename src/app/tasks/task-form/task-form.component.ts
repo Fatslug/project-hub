@@ -50,11 +50,8 @@ export class TaskFormComponent implements OnInit {
 
 			// Now get the task with that project key
 			this.taskService.getTask(this.taskID).then(task => {
-				console.log('Task retrieved: ', task);
 				if (task) {
 					this.mode = 'edit';
-					console.log(this.mode);
-
 					this.task = task;
 
 					this.taskForm.get('title').setValue(this.task.title);
