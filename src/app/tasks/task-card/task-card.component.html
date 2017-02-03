@@ -1,0 +1,16 @@
+<md-card class="example-card">
+	<md-card-header>
+		<md-card-title>{{ task.title }}</md-card-title>
+		<md-card-subtitle>Task ID: {{ task.$key }}</md-card-subtitle>
+	</md-card-header>
+	<img md-card-image src="assets/img/task-mock.png">
+	<md-card-content>
+		<p>
+			{{ task.description }}
+		</p>
+	</md-card-content>
+	<md-card-actions>
+		<button md-button routerLink="/tasks/edit/{{ task.$key }}">EDIT</button>
+		<button md-button routerLink="/tasks/view/{{ task.$key }}">VIEW</button>
+	</md-card-actions>
+</md-card>

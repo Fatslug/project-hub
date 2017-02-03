@@ -1,3 +1,4 @@
+import { SearchService } from './../search/search.service';
 import { Project } from './project.model';
 import { ProjectService } from './project.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'app-projects',
 	templateUrl: './projects.component.html',
-	styleUrls: ['./projects.component.css'],
-	providers: [
-		ProjectService
-	]
+	styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
 
@@ -23,12 +21,8 @@ export class ProjectsComponent implements OnInit {
 		});
 	}
 
-	searchProjects(searchTerm: string) {
-		if (searchTerm) {
-			this.projectService.searchProjects(searchTerm).then(projects => {
-				this.projects = projects;
-			});
-		}
+	setResults(event) {
+		this.projects = event;
 	}
 
 }
