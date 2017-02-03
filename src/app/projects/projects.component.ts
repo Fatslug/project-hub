@@ -15,11 +15,7 @@ export class ProjectsComponent implements OnInit {
 
 	constructor(private projectService: ProjectService) { }
 
-	ngOnInit() {
-		this.projectService.getAllProjects().then(projects => {
-			this.projects = projects;
-		});
-	}
+	ngOnInit() {}
 
 	setResults(event) {
 		this.projects = event;

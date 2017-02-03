@@ -1,3 +1,4 @@
+import { SearchService } from './../../search/search.service';
 import { Project } from './../../projects/project.model';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -34,17 +35,19 @@ export class TaskFormComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
-		private snackbar: MdSnackBar
+		private snackbar: MdSnackBar,
+		private searchService: SearchService
 	) {
 		// IF taskID is provided, get project by TaskID
 		// If no taskID is provided, we don't care about the TaskID
 
 		// For dropdown, return ONLY project Titles and Keys
-		this.projectService.getAllProjects().then(projects => {
+		this.searchService.getAllItems('projects').then(projects => {
 			this.projects = projects;
 		});
 
 		this.taskID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
+		this.task.projectID = this.route.snapshot.params['pid'] ? this.route.snapshot.params['pid'] : undefined;
 
 		if (this.taskID) {
 

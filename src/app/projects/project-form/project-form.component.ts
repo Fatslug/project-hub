@@ -1,3 +1,4 @@
+import { Task } from './../../tasks/task.model';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from './../project.service';
@@ -13,12 +14,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProjectFormComponent implements OnInit {
 
 	project: Project = new Project();
+	tasks: Task[];
 
 	projectForm: FormGroup;
 	title: FormControl;
 	description: FormControl;
 
-	mode: string = 'new';
+	mode: string = 'New';
 	projectID: string;
 
 	constructor (
@@ -29,16 +31,19 @@ export class ProjectFormComponent implements OnInit {
 		private snackbar: MdSnackBar
 	) {
 		this.projectID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
-		console.log(this.projectID);
+
 		if (this.projectID) {
 			this.projectService.getProject(this.projectID).then(project => {
 				if (project) {
-					this.mode = 'edit';
 
+					this.mode = 'Edit';
 					this.project = project;
-
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
+					// this.projectService.getTasksInProject(this.projectID).then(tasks => {
+					// 	this.tasks = tasks;
+					// })
+
 				} else {
 					console.log('Project does not exist');
 				}
@@ -67,7 +72,7 @@ export class ProjectFormComponent implements OnInit {
 			description: formValues.description
 		};
 
-		if (this.mode === 'edit') {
+		if (this.mode === 'Edit') {
 			project.$key = this.project.$key;
 			this.projectService.updateProject(project.$key, project).then(result => {
 				if (result) {
@@ -83,6 +88,10 @@ export class ProjectFormComponent implements OnInit {
 				}
 			});
 		}
+	}
+
+	setResults(event) {
+		this.tasks = event;
 	}
 
 }

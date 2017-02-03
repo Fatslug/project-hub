@@ -1,3 +1,4 @@
+import { Task } from './../tasks/task.model';
 import { ProjectsComponent } from './projects.component';
 import { Project } from './project.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -14,29 +15,19 @@ export class ProjectService {
 	}
 
 	getProject(projectID): Promise<Project> {
-		console.log('Getting Project...');
 		return new Promise((resolve, reject) => {
 			const projectQuery = this.firebase.database.list('projects', {
 				query: {
-					orderByKey: projectID,
+					orderByKey: true,
 					equalTo: projectID,
 					limitToFirst: 1
 				}
 			}).first().subscribe((projectRef) => {
-				console.log(projectRef);
 				if (projectRef.length === 1) {
 					resolve(projectRef[0]);
 				} else {
 					resolve(false);
 				}
-			});
-		});
-	}
-
-	getAllProjects(): Promise<Project[]> {
-		return new Promise((resolve, reject) => {
-			this.$projects.first().subscribe(project => {
-				resolve(project);
 			});
 		});
 	}
