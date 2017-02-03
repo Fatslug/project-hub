@@ -47,6 +47,7 @@ export class TaskFormComponent implements OnInit {
 		});
 
 		this.taskID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
+		this.task.projectID = this.route.snapshot.params['pid'] ? this.route.snapshot.params['pid'] : undefined;
 
 		if (this.taskID) {
 
