@@ -1,0 +1,15 @@
+<button md-raised-button routerLink="/tasks/add">Add Task</button> <br /><br />
+
+<app-search list="tasks" (onResults)="setResults($event)"></app-search>
+<br />
+
+Filters: <a href="#">Category</a>
+<br />
+
+Sort By: <a href="#">Recently Updated</a>&nbsp;&nbsp;<a href="#">Date Created</a>
+<br />
+<br />
+
+<app-task-card class="card-grid-item" *ngFor="let task of tasks" [task]="task"></app-task-card>
+
+<router-outlet></router-outlet>
