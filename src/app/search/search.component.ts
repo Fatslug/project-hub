@@ -13,6 +13,8 @@ export class SearchComponent implements OnInit {
 	searchTerm: string;
 
 	@Input() list;
+	@Input() searchIn;
+	@Input() defaultTerm = '';
 	@Output() onResults = new EventEmitter();
 
 	constructor(
@@ -20,21 +22,36 @@ export class SearchComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		console.log(this.list);
 		this.searchService.getAllItems(this.list).then(items => {
-			this.onResults.emit(items);
+			const filteredItems = items.filter(item => {
+
+				const standardizedItem = this.searchIn === 'projectID' ? item[this.searchIn] : item[this.searchIn].toLocaleLowerCase();
+				return standardizedItem.indexOf(this.defaultTerm) > -1;
+
+			});
+			this.onResults.emit(filteredItems);
 		});
 	}
 
 	searchItems(searchTerm: string) {
 		if (searchTerm) {
-			this.searchService.getAllItems(this.list).then(items => {
-				const filteredItems = items.filter(item => {
-					return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
-				});
+			if (this.defaultTerm !== '') {
+				this.searchService.getTasksInProject(this.defaultTerm).then((items) => { // Search for tasks in specific project
+					const filteredItems = items.filter(item => {
+						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
+					});
 
-				this.onResults.emit(filteredItems);
-			});
+					this.onResults.emit(filteredItems);
+				});
+			} else {
+				this.searchService.getAllItems(this.list).then(items => { // Search for a term within the title of either project or task
+					const filteredItems = items.filter(item => {
+						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
+					});
+
+					this.onResults.emit(filteredItems);
+				});
+			}
 		}
 	}
 
