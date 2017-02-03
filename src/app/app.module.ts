@@ -3,6 +3,7 @@ import { AccountService } from './account/account.service';
 import { AuthGuardService } from './auth-guard.service';
 import { ProjectService } from './projects/project.service';
 import { TaskService } from './tasks/task.service';
+import { SearchService } from './search/search.service';
 
 // Angular Libraries
 import { BrowserModule } from '@angular/platform-browser';
@@ -98,9 +99,8 @@ const appRoutes: Routes = [
 		TasksComponent,
 		TaskDetailsComponent,
 		TaskFormComponent,
-		TaskCardComponent
-	,
-    SearchComponent
+		TaskCardComponent,
+		SearchComponent
 ],
 	imports: [
 		BrowserModule,
@@ -115,7 +115,8 @@ const appRoutes: Routes = [
 		AccountService,
 		AuthGuardService,
 		TaskService,
-		ProjectService
+		ProjectService,
+		SearchService
 	],
 	bootstrap: [AppComponent]
 })
