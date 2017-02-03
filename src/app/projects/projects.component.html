@@ -1,6 +1,6 @@
 <button md-raised-button routerLink="/projects/add">Add Project</button> <br /><br />
 
-<app-search list="projects" (onResults)="setResults($event)"></app-search>
+<app-search list="projects" searchIn="title" (onResults)="setResults($event)"></app-search>
 <br />
 
 Filters: <a href="#">Category</a>
