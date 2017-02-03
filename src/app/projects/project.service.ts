@@ -14,33 +14,16 @@ export class ProjectService {
 	}
 
 	getProject(projectID): Promise<Project> {
+		console.log('Getting Project...');
 		return new Promise((resolve, reject) => {
 			const projectQuery = this.firebase.database.list('projects', {
 				query: {
-					orderByChild: 'id',
+					orderByKey: projectID,
 					equalTo: projectID,
 					limitToFirst: 1
 				}
 			}).first().subscribe((projectRef) => {
-				if (projectRef.length === 1) {
-					resolve(projectRef[0]);
-				} else {
-					resolve(false);
-				}
-			});
-		});
-	}
-
-	getProjectByTaskID(taskID): Promise<Project> {
-		return new Promise((resolve, reject) => {
-			const projectQuery = this.firebase.database.list('projects', {
-				query: {
-					orderByChild: 'tasks',
-					equalTo: taskID,
-					limitToFirst: 1
-				}
-			}).first().subscribe((projectRef) => {
-				console.log('ProjectRef', projectRef);
+				console.log(projectRef);
 				if (projectRef.length === 1) {
 					resolve(projectRef[0]);
 				} else {

@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectDetailsComponent implements OnInit {
 
 	project: Project = new Project();
-	projectID: number;
+	projectID: string;
 
 	constructor(
 		private projectService: ProjectService,
@@ -19,7 +19,7 @@ export class ProjectDetailsComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.projectID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
+		this.projectID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
 		if (this.projectID) {
 			this.projectService.getProject(this.projectID).then(project => {
 				if (project) {

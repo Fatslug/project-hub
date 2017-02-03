@@ -1,5 +1,5 @@
 <button md-raised-button routerLink="/tasks/add">Add Task</button> <br /><br />
 
-<p>
-	tasks works!
-</p>
+<app-task-card class="card-grid-item" *ngFor="let task of tasks" [task]="task"></app-task-card>
+
+<router-outlet></router-outlet>

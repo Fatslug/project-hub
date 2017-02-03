@@ -1,5 +1,5 @@
 import { ProjectService } from './../projects/project.service';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Task } from './task.model';
 import { Injectable } from '@angular/core';
 
@@ -7,19 +7,21 @@ import { Injectable } from '@angular/core';
 export class TaskService {
 
 	$tasks: FirebaseListObservable<any>;
-	$projectTasks: FirebaseListObservable<any>;
+	$projectTasks: FirebaseObjectObservable<any>;
+	// $projectTasks: FirebaseListObservable<any>;
 
 	constructor(
 		private firebase: AngularFire,
 		private projectService: ProjectService
 	) {
+		this.$tasks = this.firebase.database.list('tasks');
 	}
 
-	getTask(projectKey, taskID): Promise<Task> {
+	getTask(taskID): Promise<Task> {
 		return new Promise((resolve, reject) => {
-			const projectQuery = this.firebase.database.list('tasks/' + projectKey, {
+			const projectQuery = this.firebase.database.list('tasks', {
 				query: {
-					orderByChild: 'id',
+					orderByKey: true,
 					equalTo: taskID
 				}
 			}).first().subscribe((taskRef) => {
@@ -32,19 +34,33 @@ export class TaskService {
 		});
 	}
 
-	addTask(projectKey: string, task: Task): Promise<boolean> {
-		this.$tasks = this.firebase.database.list('tasks/' + projectKey);
-		this.$projectTasks = this.firebase.database.list('projects/' + projectKey + '/tasks');
+	getAllTasks(): Promise<Task[]> {
+		return new Promise((resolve, reject) => {
+			this.$tasks.first().subscribe(tasks => {
+				resolve(tasks);
+			});
+		});
+	}
 
+	// Push TASK to TASKS list
+	// Push TASKID to PROJECT/TASKS list
+	addTask(task: Task): Promise<boolean> {
 		console.log('Adding task...');
+		console.log('Task: ', task);
 
 		return new Promise((resolve, reject) => {
-			this.$tasks.push(task).then(result => {
-				if (result) {
-					this.$projectTasks.push(task.id).then(result => {
-						resolve(result);
+			const taskID = this.$tasks.push(task).then(taskPush => {
+				if (taskPush) {
+
+					// Push taskID to project list
+					this.$projectTasks = this.firebase.database.object('projects/' + task.projectID + '/tasks/' + taskPush.key);
+
+					this.$projectTasks.$ref.set(true).then(projectsPush => {
+						resolve(true);
 					});
+
 				} else {
+					console.log('Error pushing to tasks list');
 					resolve(false);
 				}
 			}).catch(error => {
@@ -56,6 +72,7 @@ export class TaskService {
 	updateTask(taskKey: string, task: Task): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.$tasks.update(taskKey, {
+				projectID: task.projectID,
 				title: task.title,
 				description: task.description
 			}).then(result => {

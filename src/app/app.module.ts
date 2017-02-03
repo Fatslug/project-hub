@@ -36,6 +36,7 @@ import { ProjectDetailsComponent } from './projects/project-details/project-deta
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailsComponent } from './tasks/task-details/task-details.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
+import { TaskCardComponent } from './tasks/task-card/task-card.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -79,7 +80,7 @@ const appRoutes: Routes = [
 			path: ':pid/add',
 			component: TaskFormComponent
 		}, {
-			path: ':pid/edit/:id',
+			path: ':edit/:id',
 			component: TaskFormComponent
 		}]
 	}
@@ -95,7 +96,8 @@ const appRoutes: Routes = [
 		ProjectDetailsComponent,
 		TasksComponent,
 		TaskDetailsComponent,
-		TaskFormComponent
+		TaskFormComponent,
+		TaskCardComponent
 	],
 	imports: [
 		BrowserModule,

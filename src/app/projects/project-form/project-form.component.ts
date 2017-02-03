@@ -19,7 +19,7 @@ export class ProjectFormComponent implements OnInit {
 	description: FormControl;
 
 	mode: string = 'new';
-	projectID: number;
+	projectID: string;
 
 	constructor (
 		private projectService: ProjectService,
@@ -28,7 +28,8 @@ export class ProjectFormComponent implements OnInit {
 		private router: Router,
 		private snackbar: MdSnackBar
 	) {
-		this.projectID = this.route.snapshot.params['id'] ? parseInt(this.route.snapshot.params['id'], 10) : undefined;
+		this.projectID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
+		console.log(this.projectID);
 		if (this.projectID) {
 			this.projectService.getProject(this.projectID).then(project => {
 				if (project) {
@@ -62,7 +63,6 @@ export class ProjectFormComponent implements OnInit {
 
 	addProject(formValues) {
 		const project: Project = {
-			id: this.project.id ? this.project.id : new Date().getTime(),
 			title: formValues.title,
 			description: formValues.description
 		};
@@ -72,6 +72,7 @@ export class ProjectFormComponent implements OnInit {
 			this.projectService.updateProject(project.$key, project).then(result => {
 				if (result) {
 					this.openSnackBar('Project updated!');
+					this.router.navigate(['/projects']);
 				}
 			});
 		} else {

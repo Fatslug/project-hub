@@ -1,0 +1,17 @@
+{
+    "projects": {
+        "12345": {
+            "name": "Test Project 1",
+            "tasks": {
+                "67890": true,
+                "taskid2": true
+            }
+        }
+    },
+    "tasks": {
+        "67890": {
+            "name": "Task 1",
+            "project": "12345"
+        }
+    }
+}

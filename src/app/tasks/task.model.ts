@@ -1,6 +1,6 @@
 export class Task {
-	$key?: string;
-	id: number;
+	$key?: any;
 	title: string;
 	description: string;
+	projectID: string;
 }
