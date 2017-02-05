@@ -76,7 +76,7 @@ export class ProjectFormComponent implements OnInit {
 			this.projectService.updateProject(project.$key, project).then(result => {
 				if (result) {
 					this.openSnackBar('Project updated!');
-					this.router.navigate(['/projects']);
+					this.router.navigate(['/projects']); 
 				}
 			});
 		} else {
