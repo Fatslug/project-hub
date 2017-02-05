@@ -3,3 +3,11 @@
 	<h2>Project ID: {{ project.$key }}</h2>
 	<p>{{ project.description }}</p>
 </md-card>
+
+<h2>Tasks in this project</h2>
+<app-search list="tasks" searchIn="projectID"  [defaultTerm]="projectID" (onResults)="setResults($event)"></app-search>
+
+<button md-raised-button routerLink="/tasks/{{ projectID }}/add">Add Task</button>
+<br /><br />
+
+<app-task-card class="card-grid-item" *ngFor="let task of tasks" [task]="task"></app-task-card>

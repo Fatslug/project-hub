@@ -1,3 +1,6 @@
-<p>
-  task-details works!
-</p>
+<md-card>
+	<h1>{{ task.title }}</h1>
+	<h2>Task ID: {{ task.$key }}</h2>
+	<h3>Project ID: {{ task.projectID }}</h3>
+	<p>{{ task.description }}</p>
+</md-card>

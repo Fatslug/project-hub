@@ -1,3 +1,4 @@
+import { Task } from './../../tasks/task.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from './../project.service';
 import { Project } from './../project.model';
@@ -11,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectDetailsComponent implements OnInit {
 
 	project: Project = new Project();
+	tasks: Task[];
+
 	projectID: string;
 
 	constructor(
@@ -29,6 +32,10 @@ export class ProjectDetailsComponent implements OnInit {
 				}
 			});
 		}
+	}
+
+	setResults(event) {
+		this.tasks = event;
 	}
 
 }
