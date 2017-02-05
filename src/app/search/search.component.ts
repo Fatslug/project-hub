@@ -17,11 +17,14 @@ export class SearchComponent implements OnInit {
 	@Input() defaultTerm = '';
 	@Output() onResults = new EventEmitter();
 
+	sortReverse: boolean = false;
+
 	constructor(
 		private searchService: SearchService
 	) { }
 
 	ngOnInit() {
+		this.sortReverse = false;
 		this.searchService.getAllItems(this.list).then(items => {
 			const filteredItems = items.filter(item => {
 
@@ -35,7 +38,7 @@ export class SearchComponent implements OnInit {
 
 	searchItems(searchTerm: string) {
 		if (searchTerm) {
-			if (this.defaultTerm !== '') {
+			if (this.defaultTerm !== '') { // defaultTerm is the 'scope' of the search
 				this.searchService.getTasksInProject(this.defaultTerm).then((items) => { // Search for tasks in specific project
 					const filteredItems = items.filter(item => {
 						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
@@ -43,7 +46,7 @@ export class SearchComponent implements OnInit {
 
 					this.onResults.emit(filteredItems);
 				});
-			} else {
+			} else { // If no 'scope' is provided
 				this.searchService.getAllItems(this.list).then(items => { // Search for a term within the title of either project or task
 					const filteredItems = items.filter(item => {
 						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
@@ -53,6 +56,25 @@ export class SearchComponent implements OnInit {
 				});
 			}
 		}
+	}
+
+	sortItems(list: string, property: string, reverse: boolean, scope?: string) {
+		this.searchService.sortItems(list, property).then(items => {
+			if (scope) {
+				if (this.sortReverse) {
+					this.onResults.emit(items.filter(item => item.projectID === scope).reverse());
+				} else {
+					this.onResults.emit(items.filter(item => item.projectID === scope));
+				}
+			} else {
+				if (this.sortReverse) {
+					this.onResults.emit(items.reverse());
+				} else {
+					this.onResults.emit(items);
+				}
+			}
+			this.sortReverse = !this.sortReverse;
+		});
 	}
 
 }

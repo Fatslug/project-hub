@@ -40,9 +40,6 @@ export class ProjectFormComponent implements OnInit {
 					this.project = project;
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
-					// this.projectService.getTasksInProject(this.projectID).then(tasks => {
-					// 	this.tasks = tasks;
-					// })
 
 				} else {
 					console.log('Project does not exist');
@@ -74,6 +71,8 @@ export class ProjectFormComponent implements OnInit {
 
 		if (this.mode === 'Edit') {
 			project.$key = this.project.$key;
+			project.updatedDate = new Date().getTime();
+			console.log('Updating Project... ' + project.updatedDate);
 			this.projectService.updateProject(project.$key, project).then(result => {
 				if (result) {
 					this.openSnackBar('Project updated!');
@@ -81,6 +80,8 @@ export class ProjectFormComponent implements OnInit {
 				}
 			});
 		} else {
+			project.createdDate = new Date().getTime();
+			console.log('Creating Project... ' + project.createdDate);
 			this.projectService.addProject(project).then(result => {
 				if (result) {
 					this.openSnackBar('Project Added!');

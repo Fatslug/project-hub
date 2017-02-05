@@ -48,7 +48,8 @@ export class ProjectService {
 		return new Promise((resolve, reject) => {
 			this.$projects.update(projectKey, {
 				title: project.title,
-				description: project.description
+				description: project.description,
+				updatedDate: project.updatedDate
 			}).then(result => {
 				resolve(true);
 			}).catch((error) => {

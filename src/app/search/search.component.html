@@ -4,3 +4,12 @@
 	</md-input-container>
 	<button md-button>Search</button>
 </form>
+
+Filters: <a href="#">Category</a>
+<br />
+
+Sort By: 
+<button md-button (click)="sortItems(list, 'updatedDate', sortReverse, defaultTerm)">Recently Updated</button>
+<button md-button (click)="sortItems(list, 'createdDate', sortReverse, defaultTerm)">Recently Created</button>
+<br />
+<br />

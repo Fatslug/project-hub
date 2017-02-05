@@ -33,4 +33,31 @@ export class SearchService {
 		});
 	}
 
+	filterItems(list: string, property: string, value: string) {
+		return new Promise((resolve, reject) => {
+			const projectQuery = this.firebase.database.list(list, {
+				query: {
+					orderByChild: value,
+					equalTo: value
+				}
+			}).first().subscribe(items => {
+				console.log(items);
+				resolve(items);
+			});
+		});
+	}
+
+	sortItems(list: string, property: string): Promise<any[]> {
+		return new Promise((resolve, reject) => {
+			const projectQuery = this.firebase.database.list(list, {
+				query: {
+					orderByChild: property,
+					orderByValue: true
+				}
+			}).first().subscribe(items => {
+				resolve(items.sort(function(a, b){return b[property] - a[property]}));
+			});
+		});
+	}
+
 }

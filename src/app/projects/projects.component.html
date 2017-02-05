@@ -3,13 +3,6 @@
 <app-search list="projects" searchIn="title" (onResults)="setResults($event)"></app-search>
 <br />
 
-Filters: <a href="#">Category</a>
-<br />
-
-Sort By: <a href="#">Recently Updated</a>&nbsp;&nbsp;<a href="#">Date Created</a>
-<br />
-<br />
-
 <app-project-card class="card-grid-item" *ngFor="let project of projects" [project]="project"></app-project-card>
 
 <router-outlet></router-outlet>

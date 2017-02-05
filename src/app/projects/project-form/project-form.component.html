@@ -17,14 +17,7 @@
 
     <h2>Tasks in this project</h2>
     <app-search list="tasks" searchIn="projectID"  [defaultTerm]="projectID" (onResults)="setResults($event)"></app-search>
-    <br />
-
-    Filters: <a href="#">Category</a>
-    <br />
-
-    Sort By: <a href="#">Recently Updated</a>&nbsp;&nbsp;<a href="#">Date Created</a>
-    <br /><br />
-
+    
     <button md-raised-button routerLink="/tasks/{{ projectID }}/add">Add Task</button>
     <br /><br />
 
