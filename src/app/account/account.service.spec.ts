@@ -1,16 +1,25 @@
+import { firebaseAuthConfig } from './../app.module';
+import { firebaseConfig } from './../tasks/task.service.spec';
+import { AngularFire, AngularFireModule } from 'angularfire2';
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { LoginService } from './login.service';
+import { AccountService } from './account.service';
 
-describe('LoginService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [LoginService]
-    });
-  });
+describe('AccountService', () => {
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [
+				AccountService,
+				AngularFire
+			],
+			imports: [
+				AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+			]
+		});
+	});
 
-  it('should ...', inject([LoginService], (service: LoginService) => {
-    expect(service).toBeTruthy();
-  }));
+	it('should ...', inject([AccountService], (service: AccountService) => {
+		expect(service).toBeTruthy();
+	}));
 });
