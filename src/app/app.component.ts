@@ -1,5 +1,5 @@
 // import { ToastService } from './toast.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AccountService } from './account/account.service';
 import { Component, OnInit } from '@angular/core';
 

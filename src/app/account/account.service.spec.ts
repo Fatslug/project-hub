@@ -1,12 +1,21 @@
+import { firebaseAuthConfig } from './../app.module';
+import { firebaseConfig } from './../tasks/task.service.spec';
+import { AngularFire, AngularFireModule } from 'angularfire2';
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AccountService } from './account.service';
 
-describe('LoginService', () => {
+describe('AccountService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [AccountService]
+			providers: [
+				AccountService,
+				AngularFire
+			],
+			imports: [
+				AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+			]
 		});
 	});
 

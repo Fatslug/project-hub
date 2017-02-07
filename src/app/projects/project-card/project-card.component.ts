@@ -1,3 +1,4 @@
+import { Project } from './../project.model';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class ProjectCardComponent implements OnInit {
 
-	@Input() project;
+	@Input() project = new Project();
 
 	constructor() { }
 

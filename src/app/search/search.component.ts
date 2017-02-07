@@ -12,8 +12,8 @@ export class SearchComponent implements OnInit {
 
 	searchTerm: string;
 
-	@Input() list;
-	@Input() searchIn;
+	@Input() list: string = '';
+	@Input() searchIn: string = '';
 	@Input() defaultTerm = '';
 	@Output() onResults = new EventEmitter();
 
