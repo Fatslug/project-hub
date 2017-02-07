@@ -1,3 +1,4 @@
+import { Task } from './../task.model';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class TaskCardComponent implements OnInit {
 
-	@Input() task;
+	@Input() task = new Task();
 
 	constructor() { }
 

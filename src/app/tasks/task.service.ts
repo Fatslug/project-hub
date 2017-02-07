@@ -8,7 +8,6 @@ export class TaskService {
 
 	$tasks: FirebaseListObservable<any>;
 	$projectTasks: FirebaseObjectObservable<any>;
-	// $projectTasks: FirebaseListObservable<any>;
 
 	constructor(
 		private firebase: AngularFire,

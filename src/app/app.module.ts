@@ -14,7 +14,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
 // Firebase configuration with AngularFire2
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
 export const firebaseConfig = {
 	apiKey: 'AIzaSyCbhwjhSAW-EQOPkL2aYrDdycOwiIy2Lq4',
 	authDomain: 'project-hub-21d44.firebaseapp.com',
@@ -22,7 +22,7 @@ export const firebaseConfig = {
 	storageBucket: 'project-hub-21d44.appspot.com',
 	messagingSenderId: '594687829626'
 };
-const firebaseAuthConfig = {
+export const firebaseAuthConfig = {
 	provider: AuthProviders.Google,
 	method: AuthMethods.Popup
 };
@@ -101,7 +101,7 @@ const appRoutes: Routes = [
 		TaskFormComponent,
 		TaskCardComponent,
 		SearchComponent
-],
+	],
 	imports: [
 		BrowserModule,
 		FormsModule,
@@ -116,7 +116,8 @@ const appRoutes: Routes = [
 		AuthGuardService,
 		TaskService,
 		ProjectService,
-		SearchService
+		SearchService,
+		AngularFire
 	],
 	bootstrap: [AppComponent]
 })
