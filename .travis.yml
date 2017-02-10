@@ -22,12 +22,20 @@ before_install:
 
 install:
   - docker build -t project-hub .
+  - docker images
   - docker run -d -p 4200:4200 --name project-hub project-hub
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
 before_script:
-- npm install -g angular-cli
-- npm install -g karma
-- npm install
-- ng build
+  - npm install -g angular-cli
+  - npm install -g karma
+  - npm install
+  - ng build
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "feature/dev-deployment" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push fatslug/project-hub:dev;
+    fi
 
 script: karma start karma.conf.js --single-run
