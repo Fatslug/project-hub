@@ -23,7 +23,7 @@ before_install:
 install:
   - docker build -t project-hub:dev .
   - docker images
-  - docker run -d -p 4200:4200 --name project-hub project-hub
+  - docker run -d -p 4200:4200 --name project-hub project-hub:dev
   - docker tag project-hub:dev fatslug/project-hub:dev
 
 before_script:
