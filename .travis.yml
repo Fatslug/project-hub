@@ -33,7 +33,7 @@ before_script:
   - ng build
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "feature/dev-deployment" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push fatslug/project-hub:dev;
     fi
