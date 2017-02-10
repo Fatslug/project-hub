@@ -1,5 +1,5 @@
 # Create image based on the official Node 6 image from dockerhub
-FROM node:6
+FROM node:7.5
 
 # Create a directory where our app will be placed
 RUN mkdir -p /usr/src/app
@@ -11,9 +11,7 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 
 # Install dependecies
-RUN npm install -g @angular/cli
-RUN npm install -g karma
-RUN npm install
+RUN npm install -g @angular/cli && npm cache clean && npm install -g karma && npm install
 
 # Get all the code needed to run the app
 COPY . /usr/src/app
