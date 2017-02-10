@@ -11,6 +11,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 
 # Install dependecies
+RUN npm install -g @angular/cli
+RUN npm install -g karma
 RUN npm install
 
 # Get all the code needed to run the app
