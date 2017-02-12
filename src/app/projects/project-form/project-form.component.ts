@@ -1,3 +1,4 @@
+import { DatepickerComponent } from './../../datepicker/datepicker.component';
 import { Task } from './../../tasks/task.model';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -5,6 +6,7 @@ import { ProjectService } from './../project.service';
 import { Project } from './../project.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
 	selector: 'app-project-form',
@@ -20,15 +22,18 @@ export class ProjectFormComponent implements OnInit {
 	title: FormControl;
 	description: FormControl;
 
-	mode: string = 'New';
+	mode = 'New';
 	projectID: string;
+
+	selectedOption;
 
 	constructor (
 		private projectService: ProjectService,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
-		private snackbar: MdSnackBar
+		private snackbar: MdSnackBar,
+		public dialog: MdDialog
 	) {
 		this.projectID = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : undefined;
 
@@ -40,6 +45,7 @@ export class ProjectFormComponent implements OnInit {
 					this.project = project;
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
+					this.projectForm.get('duedate').setValue(this.project.description);
 
 				} else {
 					console.log('Project does not exist');
@@ -49,12 +55,23 @@ export class ProjectFormComponent implements OnInit {
 
 		this.projectForm = this.formBuilder.group({
 			title: [this.project.title, Validators.required],
-			description: [this.project.description, Validators.required]
+			description: [this.project.description, Validators.required],
+			duedate: ['', Validators.required]
 		});
 
 	}
 
 	ngOnInit() {
+	}
+
+	openCalendar() {
+		const dialogRef = this.dialog.open(DatepickerComponent);
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				// const resultDate = new Date(result);
+				this.projectForm.get('duedate').setValue(result);
+			}
+		});
 	}
 
 	openSnackBar(message: string) {
