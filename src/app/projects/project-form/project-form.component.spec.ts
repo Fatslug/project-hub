@@ -9,7 +9,7 @@ import { AngularFire, AngularFireModule } from 'angularfire2';
 import { SearchService } from './../../search/search.service';
 import { ProjectService } from './../project.service';
 import { TaskService } from './../../tasks/task.service';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdDialog } from '@angular/material';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';

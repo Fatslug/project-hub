@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
 	selector: 'app-datepicker',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatepickerComponent implements OnInit {
 
+	@Output() dateSelected = new EventEmitter();
+
 	todayDate = new Date();
+	fullDate;
 
 	months = [
 		'January',
@@ -44,24 +48,43 @@ export class DatepickerComponent implements OnInit {
 	opacity = '0';
 	displayToggle = false;
 
-	constructor() { }
+	@HostListener('document:click', ['$event'])
+	clickout(event) {
+		if (this.displayToggle && !this.eRef.nativeElement.contains(event.target) && event.target.classList[0] !== 'mat-ripple-background') {
+			this.hide();
+		}
+	}
+
+	constructor(
+		private eRef: ElementRef,
+		public dialogRef: MdDialogRef<DatepickerComponent>
+	) { }
 
 	ngOnInit() {
 		this.currentMonthObj = this.buildMonthObject(this.currentMonth, this.currentYear);
 	}
 
 	show() {
-		this.displayToggle = true;
-		setTimeout(() => {
-			this.opacity = '100';
-		}, 100);
+		// if (!this.displayToggle) {
+		// 	this.displayToggle = true;
+		// 	setTimeout(() => {
+		// 		this.opacity = '100';
+		// 	}, 100);
+		// }
 	}
 
 	hide() {
-		this.opacity = '0';
-		setTimeout(() => {
-			this.displayToggle = false;
-		}, 600);
+		// if (this.displayToggle) {
+		// 	this.opacity = '0';
+		// 	setTimeout(() => {
+		// 		this.displayToggle = false;
+		// 	}, 600);
+		// }
+	}
+
+	changeMonth() {
+		this.currentMonthObj = this.buildMonthObject(this.currentMonth, this.currentYear);
+		this.currentDate = null;
 	}
 
 	getDaysInMonth(month: number, year: number) {
@@ -77,10 +100,17 @@ export class DatepickerComponent implements OnInit {
 		return years;
 	}
 
-	selectDay(day) {
+	selectDay(year, month, day) {
 		this.currentDate = day;
+
+		const selectedDate = new Date(year, month, day);
+
+		this.fullDate = this.months[selectedDate.getMonth()] + ' ' + selectedDate.getDate() + ', ' + selectedDate.getFullYear();
+		// this.dateSelected.emit(selectedDate);
+
 		setTimeout(() => {
-			this.hide();
+			// this.hide();
+			this.dialogRef.close(selectedDate);
 		}, 500);
 	}
 

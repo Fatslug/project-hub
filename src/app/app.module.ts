@@ -121,6 +121,9 @@ const appRoutes: Routes = [
 		SearchService,
 		AngularFire
 	],
+	entryComponents: [
+		DatepickerComponent
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

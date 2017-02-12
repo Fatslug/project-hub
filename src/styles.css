@@ -30,3 +30,9 @@ md-option {
 cdk-visually-hidden {
     display: none !important;
 }
+
+@media(max-width: 400px) {
+    .mat-select-trigger {
+        min-width: 0px !important;
+    }
+}
