@@ -39,6 +39,7 @@ import { TaskDetailsComponent } from './tasks/task-details/task-details.componen
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { TaskCardComponent } from './tasks/task-card/task-card.component';
 import { SearchComponent } from './search/search.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 // App Routing
 const appRoutes: Routes = [
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
 		TaskDetailsComponent,
 		TaskFormComponent,
 		TaskCardComponent,
-		SearchComponent
+		SearchComponent,
+		DatepickerComponent
 	],
 	imports: [
 		BrowserModule,

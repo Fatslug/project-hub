@@ -1,0 +1,47 @@
+<div class = "dp-container">
+	<div class = "dp-month-year">
+		<md-select name = "month" [(ngModel)] = "currentMonth" class = "dp-month-year" (change) = "currentMonthObj = buildMonthObject(currentMonth, currentYear)">
+			<md-option *ngFor = "let month of months; let idx = index" [value] = "idx" class = "month">
+				{{ month }}
+			</md-option>
+		</md-select>
+		<md-select name = "year" [(ngModel)] = "currentYear" class = "dp-month-year" (change) = "currentMonthObj = buildMonthObject(currentMonth, currentYear)">
+			<md-option *ngFor = "let year of years" [value] = "year" class = "month">
+				{{ year }}
+			</md-option>
+		</md-select>
+	</div>
+	<div class = "dp-dates">
+		<div class = "dp-calendar">
+			<table border = "0">
+				<tr>
+					<td class = "dp-weekday">Sun</td>
+					<td class = "dp-weekday">Mon</td>
+					<td class = "dp-weekday">Tue</td>
+					<td class = "dp-weekday">Wed</td>
+					<td class = "dp-weekday">Thu</td>
+					<td class = "dp-weekday">Fri</td>
+					<td class = "dp-weekday">Sat</td>
+				</tr>
+				<tr>
+					<td *ngFor="let day of currentMonthObj[0]">{{ day }}</td>
+				</tr>
+				<tr>
+					<td *ngFor="let day of currentMonthObj[1]">{{ day }}</td>
+				</tr>
+				<tr>
+					<td *ngFor="let day of currentMonthObj[2]">{{ day }}</td>
+				</tr>
+				<tr>
+					<td *ngFor="let day of currentMonthObj[3]">{{ day }}</td>
+				</tr>
+				<tr>
+					<td *ngFor="let day of currentMonthObj[4]">{{ day }}</td>
+				</tr>
+				<tr *ngIf="currentMonthObj[5]">
+					<td *ngFor="let day of currentMonthObj[5]">{{ day }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

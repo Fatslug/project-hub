@@ -20,7 +20,7 @@ export class ProjectFormComponent implements OnInit {
 	title: FormControl;
 	description: FormControl;
 
-	mode: string = 'New';
+	mode = 'New';
 	projectID: string;
 
 	constructor (
@@ -49,7 +49,8 @@ export class ProjectFormComponent implements OnInit {
 
 		this.projectForm = this.formBuilder.group({
 			title: [this.project.title, Validators.required],
-			description: [this.project.description, Validators.required]
+			description: [this.project.description, Validators.required],
+			duedate: ['', Validators.required]
 		});
 
 	}

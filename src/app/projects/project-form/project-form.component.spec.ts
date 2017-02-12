@@ -1,3 +1,4 @@
+import { DatepickerComponent } from './../../datepicker/datepicker.component';
 import { SearchComponent } from './../../search/search.component';
 import { TaskCardComponent } from './../../tasks/task-card/task-card.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -31,7 +32,8 @@ describe('ProjectFormComponent', () => {
 		declarations: [
 			ProjectFormComponent,
 			TaskCardComponent,
-			SearchComponent
+			SearchComponent,
+			DatepickerComponent
 		],
 		imports: [
 			MaterialModule,
