@@ -9,16 +9,14 @@
             <textarea mdInput formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
         </md-input-container>
         <md-input-container>
-            <input mdInput type="text" name="duedate" formControlName="duedate" [(ngModel)] = "duedate" placeholder="Due Date" (click)="openCalendar()" [value]="projectForm.get('duedate').value | date:fullDate" />
+            <input mdInput type="text" name="deliverydate" formControlName="deliverydate" placeholder="Delivery Date" (click)="openCalendar()" [value]="projectForm.get('deliverydate').value | date:fullDate" />
         </md-input-container>
 
         <br /><br />
 
-        <!--<app-datepicker (dateSelected)="selectDate($event)"></app-datepicker>-->
-
         <button type="submit" md-raised-button>Submit</button>
     </form>
-    
+
 </md-card>
 
 <div *ngIf="mode=='Edit'">

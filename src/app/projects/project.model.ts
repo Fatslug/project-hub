@@ -7,4 +7,5 @@ export class Project {
 	updatedDate?: number;
 	createdDate?: number;
 	users?: Account[];
+	deliveryDate: number;
 }

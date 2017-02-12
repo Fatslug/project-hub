@@ -49,7 +49,8 @@ export class ProjectService {
 			this.$projects.update(projectKey, {
 				title: project.title,
 				description: project.description,
-				updatedDate: project.updatedDate
+				updatedDate: project.updatedDate,
+				deliveryDate: project.deliveryDate
 			}).then(result => {
 				resolve(true);
 			}).catch((error) => {
