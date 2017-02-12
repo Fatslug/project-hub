@@ -45,7 +45,7 @@ export class ProjectFormComponent implements OnInit {
 					this.project = project;
 					this.projectForm.get('title').setValue(this.project.title);
 					this.projectForm.get('description').setValue(this.project.description);
-					this.projectForm.get('duedate').setValue(this.project.description);
+					this.projectForm.get('deliverydate').setValue(this.project.deliveryDate);
 
 				} else {
 					console.log('Project does not exist');
@@ -56,7 +56,7 @@ export class ProjectFormComponent implements OnInit {
 		this.projectForm = this.formBuilder.group({
 			title: [this.project.title, Validators.required],
 			description: [this.project.description, Validators.required],
-			duedate: ['', Validators.required]
+			deliverydate: [this.project.deliveryDate, Validators.required]
 		});
 
 	}
@@ -68,8 +68,7 @@ export class ProjectFormComponent implements OnInit {
 		const dialogRef = this.dialog.open(DatepickerComponent);
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				// const resultDate = new Date(result);
-				this.projectForm.get('duedate').setValue(result);
+				this.projectForm.get('deliverydate').setValue(result);
 			}
 		});
 	}
@@ -83,7 +82,8 @@ export class ProjectFormComponent implements OnInit {
 	addProject(formValues) {
 		const project: Project = {
 			title: formValues.title,
-			description: formValues.description
+			description: formValues.description,
+			deliveryDate: formValues.deliverydate.getTime()
 		};
 
 		if (this.mode === 'Edit') {
@@ -98,6 +98,7 @@ export class ProjectFormComponent implements OnInit {
 			});
 		} else {
 			project.createdDate = new Date().getTime();
+			project.updatedDate = new Date().getTime();
 			console.log('Creating Project... ' + project.createdDate);
 			this.projectService.addProject(project).then(result => {
 				if (result) {
