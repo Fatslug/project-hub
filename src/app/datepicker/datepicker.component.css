@@ -1,5 +1,16 @@
 .dp-container {
     width: 300px;
+    padding: 10px;
+    background-color: #fafafa;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: 0.5s all ease;
+}
+
+.show {
+    display: block;
+}
+.hide {
+    display: none;
 }
 
 .dp-month-year {
@@ -26,4 +37,13 @@ table {
 td {
     text-align: center;
     padding: 5px;
+    border-radius: 10px;
+}
+td:hover {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #F58955;
+    color: #FFF;
 }

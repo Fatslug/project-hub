@@ -29,19 +29,39 @@ export class DatepickerComponent implements OnInit {
 
 	currentYear: number = this.todayDate.getFullYear();
 
-	years = this.getYearRange(this.minYear, this.maxYear);
+	years: Array<number> = this.getYearRange(this.minYear, this.maxYear);
 
-	currentMonth = this.todayDate.getMonth();
-	currentDate: number;
+	currentMonth: number = this.todayDate.getMonth();
+	currentDate: number = this.todayDate.getDate();
 	currentDay: string;
 
 	daysInCurrentMonth: number;
 	currentMonthObj;
 
+	// Positioning Variables
+	positionX: string;
+	positionY: string;
+	opacity = '0';
+	displayToggle = false;
+
 	constructor() { }
 
 	ngOnInit() {
 		this.currentMonthObj = this.buildMonthObject(this.currentMonth, this.currentYear);
+	}
+
+	show() {
+		this.displayToggle = true;
+		setTimeout(() => {
+			this.opacity = '100';
+		}, 100);
+	}
+
+	hide() {
+		this.opacity = '0';
+		setTimeout(() => {
+			this.displayToggle = false;
+		}, 600);
 	}
 
 	getDaysInMonth(month: number, year: number) {
@@ -57,9 +77,27 @@ export class DatepickerComponent implements OnInit {
 		return years;
 	}
 
+	selectDay(day) {
+		this.currentDate = day;
+		setTimeout(() => {
+			this.hide();
+		}, 500);
+	}
+
+	toggleCalendar(event) {
+		this.positionX = event.layerX + 'px';
+		this.positionY = event.layerY + 'px';
+
+		if (this.displayToggle) {
+			this.hide();
+		} else {
+			this.show();
+		}
+	}
+
 	buildMonthObject(month: number, year: number) {
 		const daysInMonth = this.getDaysInMonth(month, year);
-		console.log(daysInMonth);
+
 		const weeks = new Array(5);
 		let week = new Array(7);
 		let currentWeek = 0;
@@ -70,42 +108,42 @@ export class DatepickerComponent implements OnInit {
 		let monthLoop = false;
 
 		while (monthLoop === false) {
-			console.group('Week ' + currentWeek);
+			// console.group('Week ' + currentWeek);
 
 			let currentDay = 1;
 			week = new Array(7);
 
-			console.log('Week Start Day: ', startDate);
-			console.log('Week End Day: ', endDate);
+			// console.log('Week Start Day: ', startDate);
+			// console.log('Week End Day: ', endDate);
 
 			for (let day = startDate; day <= endDate; day++) {
 				currentDay = day;
-				console.group('Current Day: ' + currentDay);
+				// console.group('Current Day: ' + currentDay);
 
 				if (currentDay > daysInMonth) {
-					console.groupEnd();
+					// console.groupEnd();
 					break;
 				}
 
 				const theDate = new Date(year, month, day);
 				const weekday = theDate.getDay();
-				console.log('Weekday: ', weekday);
+				// console.log('Weekday: ', weekday);
 
 				week[weekday] = day;
 				if (weekday === 6) {
-					console.log('End of week reached');
-					console.log('Week Array', week);
-					console.groupEnd();
+					// console.log('End of week reached');
+					// console.log('Week Array', week);
+					// console.groupEnd();
 					break;
 				}
-				console.log('Week Array', week);
-				console.groupEnd();
+				// console.log('Week Array', week);
+				// console.groupEnd();
 			}
 
 			weeks[currentWeek] = week;
-			console.log('Array of Weeks: ', weeks);
+			// console.log('Array of Weeks: ', weeks);
 
-			console.groupEnd();
+			// console.groupEnd();
 			currentWeek++;
 			startDate = currentDay + 1;
 			endDate = startDate + 7;
@@ -114,20 +152,6 @@ export class DatepickerComponent implements OnInit {
 				monthLoop = true;
 			}
 		}
-
-		// const fullMonth = [
-		// 	[
-		// 		0, 0, 1, 2, 3, 4, 5
-		// 	], [
-		// 		6, 7, 8, 9, 10, 11, 12
-		// 	], [
-		// 		13, 14, 15, 16, 17, 18, 19
-		// 	], [
-		// 		20, 21, 22, 23, 24, 25, 26
-		// 	], [
-		// 		27, 28, 29, 30
-		// 	]
-		// ];
 
 		return weeks;
 	}
