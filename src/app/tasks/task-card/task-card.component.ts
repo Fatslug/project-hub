@@ -1,4 +1,6 @@
+import { ProjectService } from './../../projects/project.service';
 import { Task } from './../task.model';
+import { Project } from './../../projects/project.model';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
@@ -9,10 +11,15 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 export class TaskCardComponent implements OnInit {
 
 	@Input() task = new Task();
+	project: Project = new Project();
 
-	constructor() { }
+	constructor(private projectService: ProjectService) {
+	}
 
 	ngOnInit() {
+		this.projectService.getProject(this.task.projectID).then((project) => {
+			this.project = project;
+		});
 	}
 
 }

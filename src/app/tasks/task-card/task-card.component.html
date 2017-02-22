@@ -1,9 +1,16 @@
 <div class="task-card">
-	<h3>{{ task.title }}</h3>
-	<div class="task-card--description">
-		<p>
-			{{ task.description }}
-		</p>
+	<div class="task-card--header">
+		Header
+	</div>
+	<div class="task-card--body">
+		<div class = "task-card--input">
+			<div class="task-card--label">Task Name</div>
+			<div class="task-card--value">{{ task.title }}</div>
+		</div>
+		<div class = "task-card--input">
+			<div class="task-card--label">Project Name</div>
+			<div class="task-card--value">{{ project.title }}</div>
+		</div>
 	</div>
 	<div class = "task-card--actions">
 		<button routerLink="/tasks/edit/{{ task.$key }}">EDIT</button>
