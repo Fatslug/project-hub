@@ -2,7 +2,6 @@ import { ProjectService } from './../../projects/project.service';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '@angular/material';
 import { ActivatedRouteSnapshot, Data } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { SearchService } from './../../search/search.service';
@@ -49,10 +48,8 @@ describe('TaskDetailsComponent', () => {
 		],
 		declarations: [ TaskDetailsComponent ],
 		imports: [
-			MaterialModule,
 			RouterTestingModule.withRoutes([]),
 			FormsModule,
-			MaterialModule,
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 		]
 		})

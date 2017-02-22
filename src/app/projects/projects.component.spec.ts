@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchComponent } from './../search/search.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
-import { MaterialModule } from '@angular/material';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -32,7 +31,6 @@ describe('ProjectsComponent', () => {
 			SearchComponent
 		],
 		imports: [
-			MaterialModule,
 			FormsModule,
 			RouterTestingModule.withRoutes([]),
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)

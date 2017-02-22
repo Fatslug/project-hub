@@ -3,7 +3,6 @@ import { firebaseConfig } from './tasks/task.service.spec';
 import { AngularFire, AngularFireModule } from 'angularfire2';
 import { AccountService } from './account/account.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '@angular/material';
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
@@ -21,7 +20,6 @@ describe('AppComponent', () => {
 		],
 		imports: [
 			RouterTestingModule.withRoutes([]),
-			MaterialModule,
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 		]
 		});

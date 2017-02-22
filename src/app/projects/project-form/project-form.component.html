@@ -1,30 +1,24 @@
-<md-card>
+<div>
     <h1>{{ mode }} Project</h1>
 
     <form [formGroup]="projectForm" (ngSubmit)="addProject(projectForm.value)">
-        <md-input-container>
-            <input mdInput formControlName="title" name="projectTitle" placeholder="Project Title" />
-        </md-input-container>
-        <md-input-container>
-            <textarea mdInput formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
-        </md-input-container>
-        <md-input-container>
-            <input mdInput type="text" name="deliverydate" formControlName="deliverydate" placeholder="Delivery Date" (click)="openCalendar()" [value]="projectForm.get('deliverydate').value | date:fullDate" />
-        </md-input-container>
+        <input formControlName="title" name="projectTitle" placeholder="Project Title" />
+        <textarea formControlName="description" name="projectDescription" placeholder="Project Description"></textarea>
+        <input type="text" name="deliverydate" formControlName="deliverydate" placeholder="Delivery Date" (click)="openCalendar()" [value]="projectForm.get('deliverydate').value | date:fullDate" />
 
         <br /><br />
 
-        <button type="submit" md-raised-button>Submit</button>
+        <button type="submit">Submit</button>
     </form>
 
-</md-card>
+</div>
 
 <div *ngIf="mode=='Edit'">
 
     <h2>Tasks in this project</h2>
     <app-search list="tasks" searchIn="projectID"  [defaultTerm]="projectID" (onResults)="setResults($event)"></app-search>
     
-    <button md-raised-button routerLink="/tasks/{{ projectID }}/add">Add Task</button>
+    <button routerLink="/tasks/{{ projectID }}/add">Add Task</button>
     <br /><br />
 
     <app-task-card class="card-grid-item" *ngFor="let task of tasks" [task]="task"></app-task-card>

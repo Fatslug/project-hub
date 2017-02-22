@@ -1,17 +1,13 @@
-<md-card class="example-card">
-	<md-card-header>
-		<md-card-title>{{ project.title }}</md-card-title>
-		<!--<md-card-subtitle>Project ID: {{ project.$key }}</md-card-subtitle>-->
-		<md-card-subtitle>Last Updated: <b>{{ project.updatedDate | date:'longDate' }} at {{ project.updatedDate | date:'shortTime' }}</b></md-card-subtitle>
-	</md-card-header>
-	<img md-card-image src="assets/img/project-mock.png">
-	<md-card-content>
+<div class="project-card">
+	<h3>{{ project.title }}</h3>
+	<span>Last Updated: <b>{{ project.updatedDate | date:'shortDate' }} at {{ project.updatedDate | date:'shortTime' }}</b></span>
+	<div class="project-card--description">
 		<p>
 			{{ project.description }}
 		</p>
-	</md-card-content>
-	<md-card-actions>
-		<button md-button routerLink="/projects/edit/{{ project.$key }}">EDIT</button>
-		<button md-button routerLink="/projects/view/{{ project.$key }}">VIEW</button>
-	</md-card-actions>
-</md-card>
+	</div>
+	<div class="project-card--actions">
+		<button routerLink="/projects/edit/{{ project.$key }}">EDIT</button>
+		<button routerLink="/projects/view/{{ project.$key }}">VIEW</button>
+	</div>
+</div>

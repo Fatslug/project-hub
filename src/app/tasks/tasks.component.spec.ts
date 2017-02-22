@@ -3,7 +3,6 @@ import { SearchService } from './../search/search.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 import { SearchComponent } from './../search/search.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 
@@ -51,7 +50,6 @@ describe('TasksComponent', () => {
 			SearchComponent
 		],
 		imports: [
-			MaterialModule,
 			RouterModule.forRoot(appRoutes),
 			FormsModule,
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { ProjectService } from './../../projects/project.service';
 import { AuthProviders, AuthMethods, AngularFireModule, AngularFire } from 'angularfire2';
 import { TaskService } from './../task.service';
-import { MaterialModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Data, ActivatedRouteSnapshot } from '@angular/router';
 /* tslint:disable:no-unused-variable */
@@ -56,7 +55,6 @@ describe('TaskFormComponent', () => {
 			RouterTestingModule.withRoutes([]),
 			ReactiveFormsModule,
 			FormsModule,
-			MaterialModule,
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 		]
 		})

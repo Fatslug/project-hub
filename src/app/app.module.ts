@@ -112,7 +112,7 @@ const appRoutes: Routes = [
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
-		MaterialModule.forRoot(),
+		MaterialModule,
 		RouterModule.forRoot(appRoutes),
 		AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 	],

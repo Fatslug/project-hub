@@ -1,15 +1,13 @@
 <form id="searchForm" (ngSubmit)="searchItems(searchTerm)">
-	<md-input-container>
-		<input mdInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search" (input)="searchItems(searchTerm)"/>
-	</md-input-container>
-	<button md-button>Search</button>
+	<input [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search" (input)="searchItems(searchTerm)"/>
+	<button>Search</button>
 </form>
 
 Filters: <a href="#">Category</a>
 <br />
 
 Sort By: 
-<button md-button (click)="sortItems(list, 'updatedDate', sortReverse, defaultTerm)">Recently Updated</button>
-<button md-button (click)="sortItems(list, 'createdDate', sortReverse, defaultTerm)">Recently Created</button>
+<button (click)="sortItems(list, 'updatedDate', sortReverse, defaultTerm)">Recently Updated</button>
+<button (click)="sortItems(list, 'createdDate', sortReverse, defaultTerm)">Recently Created</button>
 <br />
 <br />

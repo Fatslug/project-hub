@@ -3,7 +3,6 @@ import { AuthProviders, AuthMethods, FirebaseObjectObservable, FirebaseRef } fro
 import { AngularFireModule, AngularFire } from 'angularfire2';
 import { SearchService } from './search.service';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -37,7 +36,6 @@ describe('SearchComponent', () => {
 			SearchComponent
 		],
 		imports: [
-			MaterialModule,
 			FormsModule,
 			AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
 		]

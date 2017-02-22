@@ -4,16 +4,16 @@
 <!--<div class = "dp-container" style = "position: absolute; z-index: 999;" [style.top] = "positionY" [style.left] = "positionX" [style.opacity] = "opacity" [class.show] = "displayToggle" [class.hide] = "!displayToggle">-->
 <div class = "dp-container">
 	<div class = "dp-month-year">
-		<md-select name = "month" [(ngModel)] = "currentMonth" class = "dp-month" (change) = "changeMonth()">
-			<md-option *ngFor = "let month of months; let idx = index" [value] = "idx" class = "month">
+		<select name = "month" [(ngModel)] = "currentMonth" class = "dp-month" (change) = "changeMonth()">
+			<option *ngFor = "let month of months; let idx = index" [value] = "idx" class = "month">
 				{{ month }}
-			</md-option>
-		</md-select>
-		<md-select name = "year" [(ngModel)] = "currentYear" class = "dp-year" (change) = "changeMonth()">
-			<md-option *ngFor = "let year of years" [value] = "year" class = "month">
+			</option>
+		</select>
+		<select name = "year" [(ngModel)] = "currentYear" class = "dp-year" (change) = "changeMonth()">
+			<option *ngFor = "let year of years" [value] = "year" class = "month">
 				{{ year }}
-			</md-option>
-		</md-select>
+			</option>
+		</select>
 	</div>
 	<div class = "dp-dates">
 		<div class = "dp-calendar">
