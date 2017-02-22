@@ -1,0 +1,13 @@
+<button md-raised-button routerLink="/">Invite User</button> <br /><br />
+
+<app-search list="users" searchIn="displayName" (onResults)="setResults($event)"></app-search>
+<br />
+
+<div *ngFor="let user of users">
+	{{ user.displayName }}
+</div>
+<div *ngIf="users?.length <= 0">
+	We couldn't find any users with that name!
+</div>
+
+<!--<app-task-card class="card-grid-item" *ngFor="let user of users" [user]="user"></app-task-card>-->

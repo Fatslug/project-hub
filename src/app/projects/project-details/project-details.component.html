@@ -11,3 +11,6 @@
 <br /><br />
 
 <app-task-card class="card-grid-item" *ngFor="let task of tasks" [task]="task"></app-task-card>
+<div *ngIf="tasks?.length <= 0">
+	There are no tasks with that title
+</div>

@@ -4,3 +4,6 @@
 <br />
 
 <app-project-card class="card-grid-item" *ngFor="let project of projects" [project]="project"></app-project-card>
+<div *ngIf="projects?.length <= 0">
+    There are no projects with that title
+</div>

@@ -40,18 +40,20 @@ import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { TaskCardComponent } from './tasks/task-card/task-card.component';
 import { SearchComponent } from './search/search.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { UserListComponent } from './users/user-list/user-list.component';
 
 // App Routing
 const appRoutes: Routes = [
 	{
 		path: '',
 		component: HomePageComponent
-	},
-	{
+	}, {
 		path: 'home',
 		component: HomePageComponent
-	},
-	{
+	}, {
+		path: 'users',
+		component: UserListComponent
+	}, {
 		path: 'projects',
 		canActivate: [AuthGuardService],
 		children: [{
@@ -102,7 +104,8 @@ const appRoutes: Routes = [
 		TaskFormComponent,
 		TaskCardComponent,
 		SearchComponent,
-		DatepickerComponent
+		DatepickerComponent,
+		UserListComponent
 	],
 	imports: [
 		BrowserModule,

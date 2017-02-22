@@ -17,6 +17,7 @@ export class TasksComponent implements OnInit {
 	}
 
 	setResults(event) {
+		console.log(event);
 		this.tasks = event;
 	}
 }

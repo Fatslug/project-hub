@@ -12,12 +12,12 @@ export class SearchComponent implements OnInit {
 
 	searchTerm: string;
 
-	@Input() list: string = '';
-	@Input() searchIn: string = '';
+	@Input() list = '';
+	@Input() searchIn = '';
 	@Input() defaultTerm = '';
 	@Output() onResults = new EventEmitter();
 
-	sortReverse: boolean = false;
+	sortReverse = false;
 
 	constructor(
 		private searchService: SearchService
@@ -37,24 +37,28 @@ export class SearchComponent implements OnInit {
 	}
 
 	searchItems(searchTerm: string) {
-		if (searchTerm) {
-			if (this.defaultTerm !== '') { // defaultTerm is the 'scope' of the search
-				this.searchService.getTasksInProject(this.defaultTerm).then((items) => { // Search for tasks in specific project
-					const filteredItems = items.filter(item => {
-						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
-					});
+		console.log('Seatching Items...');
 
-					this.onResults.emit(filteredItems);
+		searchTerm = searchTerm ? searchTerm.toLocaleLowerCase() : '';
+		// console.log('Search Term: ', searchTerm);
+		if (this.defaultTerm !== '') { // defaultTerm is the 'scope' of the search
+			this.searchService.getTasksInProject(this.defaultTerm).then((items) => { // Search for tasks in specific project
+				const filteredItems = items.filter(item => {
+					// console.log('Filtered Items: ', item);
+					return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
 				});
-			} else { // If no 'scope' is provided
-				this.searchService.getAllItems(this.list).then(items => { // Search for a term within the title of either project or task
-					const filteredItems = items.filter(item => {
-						return item.title.toLocaleLowerCase().indexOf(searchTerm) > -1;
-					});
 
-					this.onResults.emit(filteredItems);
+				this.onResults.emit(filteredItems);
+			});
+		} else { // If no 'scope' is provided
+			this.searchService.getAllItems(this.list).then(items => { // Search for a term within the defined property of the desired object
+				const filteredItems = items.filter(item => {
+					// console.log('Filtered Items: ', item);
+					return item[this.searchIn].toLocaleLowerCase().indexOf(searchTerm) > -1;
 				});
-			}
+
+				this.onResults.emit(filteredItems);
+			});
 		}
 	}
 
